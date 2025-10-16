@@ -8,8 +8,11 @@
 [![Lighthouse](https://img.shields.io/badge/Lighthouse-100-success?style=flat-square)](docs/PERFORMANCE.md)
 [![Zero CVEs](https://img.shields.io/badge/CVEs-0-success?style=flat-square)](#)
 [![CSP Hardened](https://img.shields.io/badge/CSP-Nonce--Based-success?style=flat-square)](#)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=flat-square)](https://cybersecurity-portfolio-template.vercel.app/)
 
 **A production-ready, security-hardened portfolio template designed specifically for cybersecurity professionals**
+
+[**🚀 View Live Demo**](https://cybersecurity-portfolio-template.vercel.app/)
 
 Perfect for security analysts, penetration testers, SOC engineers, and anyone in the cybersecurity field looking to showcase their work with a modern, secure, and high-performance portfolio. Maintained by [Marcos Oliveira (@zer0spin)](https://github.com/zer0spin) with support from the Blue Team community.
 
@@ -164,8 +167,10 @@ cybersecurity-portfolio-template/
 │   ├── PERFORMANCE.md          # Performance guide
 │   ├── BLOG_SYSTEM.md          # Blog documentation
 │   ├── DEPLOYMENT.md           # Deployment guide
+│   ├── DEVELOPMENT.md          # Development guide
 │   ├── CONTRIBUTING.md         # Contribution guidelines
-│   └── IMPLEMENTATION_SUMMARY.md # Implementation summary
+│   ├── CSP_IMPLEMENTATION.md   # CSP implementation details
+│   └── SENTRY_SETUP.md         # Sentry monitoring setup
 ├── next.config.js              # Next.js configuration
 ├── tailwind.config.ts          # Tailwind theme
 ├── tsconfig.json               # TypeScript config
@@ -272,6 +277,9 @@ Comprehensive documentation available in the `/docs` folder:
 - **[Performance](./docs/PERFORMANCE.md)** - Optimization strategies and benchmarks
 - **[Blog System](./docs/BLOG_SYSTEM.md)** - Content management and MDX guide
 - **[Deployment](./docs/DEPLOYMENT.md)** - Production deployment instructions
+- **[Development](./docs/DEVELOPMENT.md)** - Development guide and best practices
+- **[CSP Implementation](./docs/CSP_IMPLEMENTATION.md)** - Content Security Policy details
+- **[Sentry Setup](./docs/SENTRY_SETUP.md)** - Monitoring and error tracking configuration
 - **[Contributing](./docs/CONTRIBUTING.md)** - Development guidelines and code standards
 
 ## 🔒 Security Features

@@ -4,8 +4,11 @@
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Security](https://img.shields.io/badge/security-hardened-brightgreen)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://cybersecurity-portfolio-template.vercel.app/)
 
 **A production-ready, security-focused portfolio template for cybersecurity professionals**
+
+[**🚀 View Live Demo**](https://cybersecurity-portfolio-template.vercel.app/)
 
 ## 📚 Documentation Index
 
@@ -16,8 +19,10 @@
 - **[Performance](./PERFORMANCE.md)** - Optimization strategies and benchmarks
 - **[Blog System](./BLOG_SYSTEM.md)** - Content management and MDX integration
 - **[Deployment](./DEPLOYMENT.md)** - Production deployment guide
+- **[Development](./DEVELOPMENT.md)** - Development guide and best practices
+- **[CSP Implementation](./CSP_IMPLEMENTATION.md)** - Content Security Policy details
+- **[Sentry Setup](./SENTRY_SETUP.md)** - Monitoring and error tracking configuration
 - **[Contributing](./CONTRIBUTING.md)** - Development guidelines and code standards
-- **[Changelog](../CHANGELOG.md)** - Version history and updates
 
 ---
 
