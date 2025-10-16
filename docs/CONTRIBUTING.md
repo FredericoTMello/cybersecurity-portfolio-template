@@ -1,10 +1,10 @@
-# Contributing to zer0spin Portfolio
+# Contributing to Cybersecurity Portfolio Template
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 ![Code Style](https://img.shields.io/badge/code%20style-prettier-ff69b4.svg)
 ![Commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)
 
-Thank you for considering contributing to the zer0spin portfolio template! This document provides guidelines and standards for contributions.
+Thank you for considering contributing to the Cybersecurity Portfolio Template! This document provides guidelines and standards for contributions. The project is stewarded by ([@zer0spin](https://github.com/zer0spin)) with support from the cybersecurity community.
 
 ---
 
@@ -56,8 +56,8 @@ We pledge to make participation in our project a harassment-free experience for 
 
 ```bash
 # Fork and clone
-git clone https://github.com/yourusername/zer0spin.git
-cd zer0spin
+git clone https://github.com/zer0spin/cybersecurity-portfolio-template.git
+cd cybersecurity-portfolio-template
 
 # Install dependencies
 npm install
@@ -75,7 +75,7 @@ npm run dev
 
 ### 1. Pick an Issue
 
-- Browse [open issues](https://github.com/zer0spin/zer0spin/issues)
+- Browse [open issues](https://github.com/zer0spin/cybersecurity-portfolio-template/issues)
 - Comment that you're working on it
 - Or create a new issue to propose changes
 
@@ -493,7 +493,7 @@ describe('CodeBlock', () => {
 ### Security Vulnerabilities
 
 **DO NOT** open public issues for security issues.
-Email: security@yourdomain.com
+Email: zer0spinsec@proton.me
 
 ### Bug Reports
 
@@ -547,8 +547,9 @@ Screenshots, mockups, references
 ## 📞 Getting Help
 
 - **Documentation**: Check `/docs` folder
-- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/zer0spin/discussions)
-- **Issues**: [GitHub Issues](https://github.com/zer0spin/zer0spin/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/cybersecurity-portfolio-template/discussions)
+- **Issues**: [GitHub Issues](https://github.com/zer0spin/cybersecurity-portfolio-template/issues)
+- **Maintainer**: Reach out to Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) via issues/discussions; email [zer0spinsec@proton.me](mailto:zer0spinsec@proton.me) for security disclosures
 - **Discord**: [Join our community](#) (if applicable)
 
 ---
@@ -574,4 +575,6 @@ Thank you for contributing! 🚀
 
 ---
 
-*Last updated: October 14, 2025*
+**Maintained by Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) with contributions from the cybersecurity community.**
+
+*Last updated: October 16, 2025*

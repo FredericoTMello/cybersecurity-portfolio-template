@@ -1,39 +1,44 @@
 /**
  * Site Configuration
- * 
+ *
  * Central configuration for site-wide metadata, branding, and URLs.
- * Update these values to customize your portfolio.
+ * ⚠️ IMPORTANT: Update these values with your own information!
+ *
+ * This is a template - replace all placeholder values with your actual details.
  */
 
 export const siteConfig = {
   /**
    * Site identity and branding
+   * Replace with your name and professional details
    */
-  name: 'zer0spin - Blue Team Cybersecurity',
-  codename: 'zer0spin',
+  name: 'Your Name - Cybersecurity Professional',
+  codename: 'your-handle', // Your preferred username/handle
   author: {
-    name: 'Marcos Oliveira',
-    codename: 'zer0spin',
-    jobTitle: 'Blue Team Cybersecurity Specialist',
-    tagline: 'Applying reverse entropy to system defense.',
-    description: 'From quantum mechanics to defense bits. I analyze threats with the same curiosity I pursued subatomic particles. Blue Team by passion, physicist by training.',
-    organization: 'Independent',
+    name: 'Your Full Name',
+    codename: 'your-handle',
+    jobTitle: 'Cybersecurity Specialist | Blue Team', // Your professional title
+    tagline: 'Your professional tagline or motto',
+    description: 'Your professional bio. Describe your background, expertise, and what makes you unique in the cybersecurity field.',
+    organization: 'Your Organization or Independent',
   },
 
   /**
    * Site URLs and domains
+   * Update with your actual domain
    */
   urls: {
-    base: 'https://zer0spin.com',
-    canonical: 'https://zer0spin.com',
+    base: 'https://yourdomain.com',
+    canonical: 'https://yourdomain.com',
   },
 
   /**
    * Default SEO metadata
+   * Customize for better search engine optimization
    */
   seo: {
-    title: 'Marcos Oliveira (zer0spin) - Blue Team Cybersecurity Professional',
-    description: 'Defending systems. Connecting people. Inspiring the next generation of Blue Team. Professional portfolio of Marcos Oliveira, specialist in Blue Team operations, defensive cybersecurity, SIEM, SOC, and incident response.',
+    title: 'Your Name - Cybersecurity Professional Portfolio',
+    description: 'Professional portfolio showcasing cybersecurity projects, blog posts, and expertise. Specializing in [your specializations].',
     keywords: [
       'cybersecurity',
       'blue team',
@@ -44,22 +49,24 @@ export const siteConfig = {
       'incident response',
       'threat hunting',
       'security operations',
-      'Marcos Oliveira',
-      'zer0spin',
+      'your name', // Replace with your actual name
+      'your handle', // Replace with your handle
     ],
   },
 
   /**
    * Default OG image
+   * Path to your social media preview image (recommended: 1200x630px)
    */
   defaultImage: '/images/site/og-default.png',
 
   /**
    * Supported languages
+   * Add or remove languages as needed
    */
   languages: {
     default: 'en-US',
-    supported: ['en-US', 'pt-BR'],
+    supported: ['en-US'], // Add 'pt-BR', 'es-ES', etc. as needed
   },
 
   /**
@@ -67,25 +74,24 @@ export const siteConfig = {
    */
   theme: {
     defaultMode: 'dark',
-    color: '#0a1929',
+    color: '#0a1929', // Your brand color in hex
   },
 
   /**
    * Educational background
+   * Update with your actual educational institutions
    */
   education: [
     {
-      name: 'Universidade Federal de Uberlândia',
+      name: 'Your University Name',
       type: 'EducationalOrganization',
     },
-    {
-      name: 'Centro Universitário Estácio de Sá',
-      type: 'EducationalOrganization',
-    },
+    // Add more education entries as needed
   ],
 
   /**
    * Areas of expertise
+   * List your key skills and specializations
    */
   expertise: [
     'Cybersecurity',
@@ -95,6 +101,7 @@ export const siteConfig = {
     'Threat Hunting',
     'Security Operations Center',
     'Defensive Security',
+    // Add your specific expertise areas
   ],
 } as const;
 

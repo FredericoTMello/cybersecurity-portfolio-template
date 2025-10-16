@@ -4,7 +4,7 @@
 ![SOLID](https://img.shields.io/badge/SOLID-principles-success)
 ![Code Quality](https://img.shields.io/badge/code%20quality-9.5%2F10-brightgreen)
 
-**System design, architectural patterns, and code organization for the zer0spin portfolio**
+**System design, architectural patterns, and code organization for the cybersecurity portfolio template**
 
 ---
 
@@ -60,7 +60,7 @@
 | Decision | Rationale | Trade-offs |
 |----------|-----------|------------|
 | **Static Site Generation** | Maximum security, performance, and SEO | No dynamic server-side features |
-| **App Router (Next.js 14)** | Modern routing, RSC support, better DX | Learning curve from Pages Router |
+| **App Router (Next.js 15)** | Modern routing, RSC support, better DX | Learning curve from Pages Router |
 | **TypeScript** | Type safety, better IDE support, fewer bugs | Compilation overhead |
 | **Tailwind CSS** | Rapid development, consistent design system | Larger HTML files |
 | **MDX for Blog** | Rich content, React components in markdown | Build-time processing required |
@@ -134,17 +134,13 @@ src/
 │   ├── formation/                # Education page
 │   └── projects/                 # Projects showcase
 ├── components/                   # React components
-│   ├── CodeBlock.tsx             # Code syntax highlighting
-│   ├── FloatingNav.tsx           # Navigation sidebar
-│   ├── Header.tsx                # Page headers
-│   ├── SectionTitle.tsx          # Section titles
-│   ├── TypewriterAnimation.tsx   # Hero animation
-│   ├── sections/                 # Page sections
-│   │   ├── Home.tsx              # Hero section
-│   │   ├── Projects.tsx          # Projects grid
-│   │   ├── Blog.tsx              # Blog listing
-│   │   └── ...
-│   └── monitoring/               # Web vitals
+│   ├── home/                     # Homepage preview sections (BlogPreview, ProjectsPreview, etc.)
+│   ├── layout/                   # Header, FloatingNav, wrapper utilities
+│   ├── pages/                    # Page-specific compositions (Experience, Formation, Projects)
+│   ├── ui/                       # Reusable primitives (SectionTitle, CodeBlock, TypewriterAnimation)
+│   ├── monitoring/               # Web Vitals monitor component
+│   ├── motion/                   # LazyMotion wrapper to tree-shake Framer Motion
+│   └── error/                    # Error boundary and fallback UIs
 ├── config/                       # Configuration
 │   ├── site.config.ts            # Site metadata
 │   └── social.config.ts          # Social links
@@ -800,4 +796,4 @@ See [PERFORMANCE.md](./PERFORMANCE.md) for details.
 
 ---
 
-*Last updated: October 14, 2025*
+*Last updated: October 16, 2025*

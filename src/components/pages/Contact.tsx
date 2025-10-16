@@ -16,21 +16,21 @@ const contactMethods: ContactMethod[] = [
   {
     name: 'LinkedIn',
     icon: <Linkedin size={24} />,
-    href: 'https://linkedin.com/in/marcos-oliveira-infosec',
+    href: 'https://linkedin.com/in/your-linkedin-username',
     description: 'Connect for professional networking',
     color: 'border-cyber-cyan/30 hover:border-cyber-cyan hover:shadow-glow-cyan text-cyber-cyan'
   },
   {
     name: 'GitHub',
     icon: <Github size={24} />,
-    href: 'https://github.com/zer0spin',
+    href: 'https://github.com/yourusername',
     description: 'View my open source projects',
     color: 'border-cyber-gray/30 hover:border-cyber-gray-light hover:shadow-glow-cyan text-cyber-gray-light'
   },
   {
     name: 'Email',
     icon: <Mail size={24} />,
-    href: 'mailto:zer0spinsec@proton.me',
+    href: 'mailto:your.email@example.com',
     description: 'Send me a secure email',
     color: 'border-cyber-green/30 hover:border-cyber-green hover:shadow-glow-green text-cyber-green'
   }
@@ -117,48 +117,25 @@ export default function ContactSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="flex justify-center items-center gap-4 mb-16"
+            className="flex flex-col items-center gap-6 mb-16"
           >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-cyber-cyan/30" />
-            <TypewriterAnimation 
-              text="by ~/zer0spin" 
+            <div className="flex items-center gap-4">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-cyber-cyan/30" />
+              <TypewriterAnimation
+                text="by ~/yourusername"
+                speed={150}
+                className="text-2xl font-bold"
+                delay={1000}
+              />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-cyber-cyan/30" />
+            </div>
+            <TypewriterAnimation
+              text="[OK] Fighting digital entropy since 2025..."
               speed={150}
-              className="text-2xl font-bold"
-              delay={1000}
+              className="text-lg font-mono text-cyber-gray-light"
+              delay={1400}
             />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-cyber-cyan/30" />
           </m.div>
-
-          {/* Decorative Footer */}
-          <m.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex justify-center items-center gap-4 mb-16"
-          >
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-cyber-cyan/30" />
-            <TypewriterAnimation 
-              text="[OK] Fighting digital entropy since 2025..." 
-              speed={150}
-              className="text-2xl font-bold"
-              delay={1000}
-            />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-cyber-cyan/30" />
-          </m.div>
-
-          {/* Footer
-          <m.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-16 pt-8 border-t border-cyber-cyan/10"
-          >
-            <p className="text-cyber-gray text-sm">
-              © 2024 Marcos Oliveira. All rights reserved.
-            </p>
-          </m.div> */}
         </div>
       </div>
     </section>

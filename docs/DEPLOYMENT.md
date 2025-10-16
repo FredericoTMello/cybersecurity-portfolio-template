@@ -26,7 +26,7 @@
 
 ✅ **Best for**: Full control, custom requirements  
 ✅ **Options**: AWS, DigitalOcean, Linode, Railway  
-✅ **Requirements**: Node.js 18+, PM2 or Docker
+✅ **Requirements**: Node.js 18+, PM2
 
 ---
 
@@ -194,76 +194,6 @@ netlify login
 
 # Build and deploy
 netlify deploy --prod
-```
-
----
-
-## 🐳 Docker Deployment
-
-### Dockerfile
-
-Create `Dockerfile` in project root:
-
-```dockerfile
-# Build stage
-FROM node:18-alpine AS builder
-
-WORKDIR /app
-
-# Install dependencies
-COPY package*.json ./
-RUN npm ci
-
-# Copy source
-COPY . .
-
-# Build
-RUN npm run build
-
-# Production stage
-FROM node:18-alpine AS runner
-
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-# Copy built files
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-EXPOSE 3000
-
-CMD ["node", "server.js"]
-```
-
-### docker-compose.yml
-
-```yaml
-version: '3.8'
-
-services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-    restart: unless-stopped
-```
-
-### Deploy
-
-```bash
-# Build image
-docker build -t zer0spin-portfolio .
-
-# Run container
-docker run -p 3000:3000 zer0spin-portfolio
-
-# Or use docker-compose
-docker-compose up -d
 ```
 
 ---
@@ -593,7 +523,6 @@ npm audit fix
 - [Vercel Documentation](https://vercel.com/docs)
 - [Netlify Documentation](https://docs.netlify.com/)
 - [Next.js Deployment](https://nextjs.org/docs/deployment)
-- [Docker Documentation](https://docs.docker.com/)
 - [DNS Checker](https://dnschecker.org/)
 - [SSL Test](https://www.ssllabs.com/ssltest/)
 

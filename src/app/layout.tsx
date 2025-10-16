@@ -21,10 +21,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zer0spin.com'),
+  metadataBase: new URL('https://yourdomain.com'),
   ...generateSEO({
-    title: 'Marcos Oliveira (zer0spin) - Blue Team Cybersecurity Professional',
-    description: 'Defending systems. Connecting people. Inspiring the next generation of Blue Team. Professional portfolio of Marcos Oliveira, specialist in Blue Team operations, defensive cybersecurity, SIEM, SOC, and incident response.',
+    title: 'Your Name - Blue Team Cybersecurity Professional',
+    description: 'Professional cybersecurity portfolio showcasing Blue Team operations, defensive security expertise, SIEM, SOC operations, threat hunting, and incident response capabilities.',
     url: '/',
     type: 'website',
     tags: ['portfolio', 'blue team', 'SOC analyst', 'threat hunting', 'security operations'],

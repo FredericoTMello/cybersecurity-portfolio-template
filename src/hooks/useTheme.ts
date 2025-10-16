@@ -9,7 +9,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 type Theme = 'dark' | 'light';
 
-const THEME_STORAGE_KEY = 'zer0spin-theme';
+const THEME_STORAGE_KEY = 'portfolio-theme';
 const DARK_CLASS = 'dark';
 
 /**

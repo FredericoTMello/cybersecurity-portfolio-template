@@ -1,6 +1,6 @@
 {
-  "name": "zer0spin - Blue Team Cybersecurity",
-  "short_name": "zer0spin",
+  "name": "Cybersecurity Portfolio Template",
+  "short_name": "CyberPortfolio",
   "description": "Professional Blue Team cybersecurity portfolio showcasing projects, experience, and insights in defensive security operations.",
   "start_url": "/",
   "display": "standalone",
@@ -11,7 +11,7 @@
     {
       "src": "/images/site/icon-192.jpeg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {

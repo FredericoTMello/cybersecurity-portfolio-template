@@ -10,7 +10,7 @@
 
 ## 📋 Overview
 
-The zer0spin portfolio uses a powerful MDX-based blog system that combines:
+The cybersecurity portfolio template uses a powerful MDX-based blog system that combines:
 - **Markdown** for easy content writing
 - **React Components** embedded in content
 - **Syntax Highlighting** for code blocks
@@ -458,14 +458,21 @@ if (!SLUG_REGEX.test(slug)) {
 
 ### Content Security Policy
 
-CSP headers prevent inline script execution:
+The middleware issues a nonce-backed CSP in production, allowing the blog to execute only scripts that carry the generated nonce:
 
 ```typescript
-// middleware.ts
-headers.set('Content-Security-Policy', 
-  "script-src 'self'; style-src 'self' 'unsafe-inline';"
-);
+// Simplified excerpt from src/middleware.ts
+const csp = `
+  default-src 'self';
+  script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://va.vercel-scripts.com https://vercel.live;
+  style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com;
+  img-src 'self' blob: data: https:;
+  connect-src 'self' https://vitals.vercel-insights.com https://vercel.live https://*.ingest.sentry.io;
+`;
+response.headers.set('Content-Security-Policy', csp);
 ```
+
+When you introduce additional embeds, whitelist the hostnames in the corresponding CSP directives instead of falling back to `unsafe-inline`.
 
 ---
 
@@ -494,12 +501,12 @@ headers.set('Content-Security-Policy',
 
 ## 📚 Examples
 
-Check out the existing blog posts for examples:
+Current sample posts you can reference:
 
-- **`beuni-platform-devsecops.mdx`** - Technical deep dive with code examples
-- **`building-cybersec-br-community.mdx`** - Community building story
-- **`building-zer0spin-portfolio.mdx`** - Portfolio development process
-- **`infosec-digest-automation.mdx`** - Automation project showcase
+- **`advanced-log-analysis.mdx`** – SIEM lab focused on log enrichment and correlation
+- **`incident-response-playbook.mdx`** – Incident handling walkthrough with actionable steps
+- **`intro-to-threat-hunting.mdx`** – Foundational hunting techniques and toolchain overview
+- **`siem-best-practices.mdx`** – Guidance for tuning detection engineering workflows
 
 ---
 
@@ -527,4 +534,4 @@ Check out the existing blog posts for examples:
 
 ---
 
-*Last updated: October 14, 2025*
+*Last updated: October 16, 2025*

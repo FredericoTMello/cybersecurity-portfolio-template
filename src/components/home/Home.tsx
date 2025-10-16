@@ -3,6 +3,7 @@
 import { m } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { memo, useState, useEffect } from 'react';
+import { siteConfig } from '@/config/site.config';
 
 interface HomeTranslations {
   badge: string;
@@ -18,14 +19,16 @@ interface HomeSectionProps {
 }
 
 function HomeSection({ translations }: HomeSectionProps) {
-  const t: HomeTranslations = translations || {
+  const defaultTranslations: HomeTranslations = {
     badge: 'Blue Team | Defensive Security',
-    title: 'Marcos Oliveira',
-    codename: 'zer0spin',
-    tagline: 'Applying reverse entropy to system defense.',
-    description: 'From quantum mechanics to defense bits. I analyze threats with the same curiosity I pursued subatomic particles. Blue Team by passion, physicist by training.',
-    cta: 'Explore Projects'
+    title: siteConfig.author.name,
+    codename: siteConfig.codename,
+    tagline: siteConfig.author.tagline,
+    description: siteConfig.author.description,
+    cta: 'Explore Projects',
   };
+
+  const t: HomeTranslations = translations ?? defaultTranslations;
 
   // Performance: Reduce particle count on mobile devices for better GPU performance
   // Desktop: 12 particles, Mobile: 6 particles

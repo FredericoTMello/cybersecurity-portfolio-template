@@ -1,7 +1,7 @@
 {
-  "name": "zer0spin-portfolio",
+  "name": "cybersecurity-portfolio-template",
   "version": "1.0.0",
-  "description": "Blue Team Cybersecurity Portfolio - Marcos Oliveira (zer0spin)",
+  "description": "Blue Team Cybersecurity Portfolio Template - Professional Security Portfolio",
   "private": true,
   "type": "module",
   "scripts": {

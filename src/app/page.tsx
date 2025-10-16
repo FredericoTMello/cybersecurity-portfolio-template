@@ -4,6 +4,7 @@ import { Header, FloatingNav } from '@/components/layout';
 import HomeSection from '@/components/home/Home';
 import HomelabPreview from '@/components/home/HomelabPreview';
 import { generateSEO } from '@/lib/seo';
+import { siteConfig } from '@/config/site.config';
 
 // Dynamic imports for below-the-fold content
 const ProjectsPreview = dynamic(() => import('@/components/home/ProjectsPreview'));
@@ -13,22 +14,22 @@ const ExperienceSection = dynamic(() => import('@/components/pages/Experience'))
 const ContactSection = dynamic(() => import('@/components/pages/Contact'));
 
 export const metadata: Metadata = generateSEO({
-  title: 'Marcos Oliveira (zer0spin) - Blue Team Cybersecurity Professional',
-  description: 'Defending systems. Connecting people. Inspiring the next generation of Blue Team. Portfolio showcasing projects, experience, and insights in defensive cybersecurity, SIEM, SOC operations, and incident response.',
+  title: siteConfig.seo.title,
+  description: siteConfig.seo.description,
   url: '/',
   type: 'profile',
-  tags: ['portfolio', 'blue team professional', 'cybersecurity projects', 'security blog', 'SOC operations'],
+  tags: [...siteConfig.expertise],
 });
 
 export default function Home() {
   // English translations
   const homeTranslations = {
     badge: 'Blue Team | Defensive Security',
-    title: 'Marcos Oliveira',
-    codename: 'zer0spin',
-    tagline: 'Applying reverse entropy to system defense.',
-    description: 'From quantum mechanics to defense bits. I analyze threats with the same curiosity I once pursued subatomic particles. Blue Team by passion, physicist by training.',
-    cta: 'Explore Projects'
+    title: siteConfig.author.name,
+    codename: siteConfig.codename,
+    tagline: siteConfig.author.tagline,
+    description: siteConfig.author.description,
+    cta: 'Explore Projects',
   };
 
   return (

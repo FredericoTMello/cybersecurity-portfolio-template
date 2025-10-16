@@ -31,8 +31,8 @@ export default function AboutPage() {
                 <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-cyber-cyan/30 shadow-neon-cyan bg-gradient-to-br from-cyber-cyan/20 to-cyber-green/20">
                   {/* Profile Photo */}
                   <NextImage
-                    src="/images/about/zer0spin.png"
-                    alt="Marcos Oliveira - zer0spin"
+                    src="/images/about/hacker-pic.png"
+                    alt="Cybersecurity analyst avatar"
                     width={192}
                     height={192}
                     className="w-full h-full object-cover"
@@ -53,11 +53,11 @@ export default function AboutPage() {
                 </div>
 
                 <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-                  About <span className="text-cyber-cyan">zer0spin</span>
+                  About <span className="text-cyber-cyan">Me</span>
                 </h1>
 
                 <p className="text-xl text-cyber-gray-light leading-relaxed max-w-2xl md:max-w-none">
-                  Information Security Analyst focused on Blue Team defense, translating complex threat activity into resilient controls with the same analytical rigor I once applied to physics experiments.
+                  Cybersecurity professional focused on Blue Team defense operations, threat detection, and building resilient security architectures.
                 </p>
               </div>
             </div>
@@ -76,27 +76,27 @@ export default function AboutPage() {
 
               <div className="space-y-4 text-cyber-gray-light leading-relaxed">
                 <p>
-                  I harden defenses by turning threat intelligence into action. Every assessment starts with a clear mission: understand how attackers move, translate those insights into resilient controls, and ship guidance Blue Teams can deploy the same sprint.
+                  As a dedicated cybersecurity professional, I specialize in defensive security operations with a focus on threat detection, incident response, and security monitoring. My approach combines technical expertise with strategic thinking to build resilient security architectures.
                 </p>
 
                 <p>
-                  On each engagement I sit with pentesters to dissect tactics, techniques, and procedures in detail. I map the campaign to MITRE ATT&amp;CK, craft Sigma analytics, and document hardening tasks that close the feedback loop between red team discovery and blue team execution.
+                  My work centers on understanding attacker methodologies and translating threat intelligence into actionable defenses. I regularly work with security tools like SIEM platforms, EDR solutions, and threat intelligence feeds to identify and neutralize threats before they impact operations.
                 </p>
 
                 <p>
-                  Years immersed in physics taught me how to model complex systems, hunt for anomalies, and iterate fast on hypotheses. That analytical muscle now powers my day-to-day work—anticipating attack paths, tuning SOC telemetry, and spotting the faint signals that betray intrusion.
+                  I believe in continuous learning and staying current with the evolving threat landscape. My analytical approach to problem-solving helps me anticipate attack vectors, tune detection rules, and improve security posture through data-driven decisions.
                 </p>
 
                 <p>
-                  Before infosec, I taught physics, mathematics, robotics, and programming across primary and secondary education. Explaining difficult ideas to curious students sharpened my communication style and ignited my fascination with emerging tech, especially the ways AI can accelerate learning and detection engineering.
+                  Throughout my career, I&apos;ve developed expertise in security operations center (SOC) operations, threat hunting, and incident response. I enjoy the challenge of defending against sophisticated adversaries and collaborating with teams to strengthen organizational security.
                 </p>
 
                 <p>
-                  My academic track has the same investigative spirit. I built and operated a cloud chamber for cosmic-ray detection, translated scientific papers, and now research topological insulators such as Bi<sub>2</sub>Se<sub>3</sub> and Bi<sub>2</sub>T<sub>3</sub> at the master&apos;s level. Studying how intense magnetic fields reshape their quantum states keeps me grounded in rigorous experimentation and disciplined documentation.
+                  I&apos;m passionate about the defensive side of cybersecurity and committed to advancing my skills in threat intelligence, security automation, and detection engineering. My goal is to contribute to building more secure digital environments through proactive defense strategies.
                 </p>
 
                 <p>
-                  I&apos;m focused on growing into senior SOC, Threat Intelligence, and Incident Response roles—spaces where disciplined analysis, scientific curiosity, and collaborative execution genuinely raise the bar for defenders.
+                  Looking forward, I&apos;m focused on growing my expertise in advanced threat detection, security architecture, and contributing to the broader cybersecurity community through knowledge sharing and collaboration.
                 </p>
               </div>
             </m.div>
@@ -156,19 +156,21 @@ export default function AboutPage() {
 
               <div className="space-y-4 text-cyber-gray-light leading-relaxed">
                 <p className="text-lg">
-                  <span className="text-cyber-cyan font-mono">&ldquo;Applying reverse entropy to system defense.&rdquo;</span>
+                  <span className="text-cyber-cyan font-mono">&ldquo;Defense through understanding, detection through vigilance.&rdquo;</span>
                 </p>
 
                 <p>
-                  In physics, entropy measures disorder. In cybersecurity, we fight digital entropy -
-                  the constant threat of chaos introduced by attackers. My mission is to maintain order,
-                  protect integrity, and ensure systems operate within their intended parameters.
+                  Effective cybersecurity requires more than just implementing tools and controls.
+                  It demands a deep understanding of both attacker tactics and defender capabilities.
+                  My mission is to maintain strong security postures through continuous monitoring,
+                  proactive threat hunting, and data-driven defense strategies.
                 </p>
 
                 <p>
-                  Every security incident is an opportunity to learn. Every vulnerability discovered
-                  is a chance to strengthen defenses. This mindset of continuous improvement, borrowed
-                  from scientific research, drives my approach to cybersecurity.
+                  Every security incident is an opportunity to learn and improve. Every vulnerability
+                  discovered is a chance to strengthen defenses. This mindset of continuous improvement
+                  and adaptation drives my approach to cybersecurity and keeps me motivated in the
+                  ever-evolving landscape of information security.
                 </p>
               </div>
             </m.div>

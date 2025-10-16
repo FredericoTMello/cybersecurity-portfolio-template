@@ -1,94 +1,94 @@
 # 🔍 Sentry Setup Guide
 
-Este guia mostra como configurar o Sentry para monitoramento de produção do seu portfolio.
+This guide walks through enabling Sentry monitoring for the cybersecurity portfolio template.
 
-## ⏱️ Tempo Estimado: 5 minutos
-
----
-
-## 📋 Pré-requisitos
-
-- ✅ Conta no Sentry (gratuita)
-- ✅ Projeto deployado na Vercel
-- ✅ Acesso às configurações de ambiente da Vercel
+## ⏱️ Estimated Time: 5 minutes
 
 ---
 
-## 🚀 Passo a Passo
+## 📋 Prerequisites
 
-### 1. Criar Conta no Sentry
-
-1. Acesse: https://sentry.io/signup/
-2. Escolha **"Sign up for free"**
-3. Complete o cadastro com email ou GitHub
-
-**Free Tier Inclui**:
-- ✅ 5,000 errors/mês
-- ✅ 10,000 performance transactions/mês
-- ✅ 50 session replays/mês
-- ✅ 30 dias de retenção de dados
-- ✅ Projetos ilimitados
-
-> **Suficiente para**: ~1,000 visitantes/mês ✅
+- ✅ Sentry account (free tier works)
+- ✅ Project deployed on Vercel (or another platform with environment variables)
+- ✅ Access to production environment variables
 
 ---
 
-### 2. Criar Projeto Next.js
+## 🚀 Step-by-Step
 
-1. No dashboard do Sentry, clique em **"Create Project"**
-2. Selecione plataforma: **Next.js**
-3. Escolha nome do projeto: `zer0spin-portfolio` (ou seu nome)
-4. Clique em **"Create Project"**
+### 1. Create a Sentry Account
 
----
+1. Visit https://sentry.io/signup/
+2. Choose **"Sign up for free"**
+3. Complete the registration using email, GitHub, or another provider
 
-### 3. Copiar DSN (Data Source Name)
+**Free Tier Includes**:
+- ✅ 5,000 errors/month
+- ✅ 10,000 performance transactions/month
+- ✅ 50 session replays/month
+- ✅ 30-day data retention
+- ✅ Unlimited projects
 
-Após criar o projeto, você verá a página de setup.
-
-1. Na seção **"Configure SDK"**, copie o **DSN**
-2. Deve ter formato: `https://xxxxx@o123456.ingest.sentry.io/123456`
-
-Alternativamente, você pode acessar:
-- **Settings** → **Projects** → Seu Projeto → **Client Keys (DSN)**
+> **Enough for** ~1,000 monthly visitors ✅
 
 ---
 
-### 4. Configurar Variáveis de Ambiente na Vercel
+### 2. Create a Next.js Project
 
-#### Opção A: Via Dashboard Vercel
+1. In the Sentry dashboard, click **"Create Project"**
+2. Select the **Next.js** platform
+3. Name the project `cybersecurity-portfolio-template` (or another descriptive name)
+4. Click **"Create Project"**
 
-1. Acesse seu projeto na Vercel
-2. Vá em **Settings** → **Environment Variables**
-3. Adicione as seguintes variáveis:
+---
+
+### 3. Copy the DSN (Data Source Name)
+
+After creating the project, Sentry displays the setup instructions.
+
+1. Under **"Configure SDK"**, copy the **DSN**
+2. It looks like `https://xxxxx@o123456.ingest.sentry.io/123456`
+
+You can also find it later via:
+- **Settings** → **Projects** → Your project → **Client Keys (DSN)**
+
+---
+
+### 4. Configure Environment Variables
+
+#### Option A: Vercel Dashboard
+
+1. Open your project in Vercel
+2. Navigate to **Settings** → **Environment Variables**
+3. Add the following variables:
 
 ```bash
-# Obrigatório
+# Required
 NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@o123456.ingest.sentry.io/123456
 
-# Opcional (para upload de source maps)
+# Optional (for source map upload)
 SENTRY_ORG=your-org-slug
-SENTRY_PROJECT=zer0spin-portfolio
+SENTRY_PROJECT=cybersecurity-portfolio-template
 SENTRY_AUTH_TOKEN=your-auth-token
 ```
 
-4. Selecione ambientes: **Production, Preview, Development**
-5. Clique em **"Save"**
+4. Apply to **Production**, **Preview**, and **Development**
+5. Click **"Save"**
 
-#### Opção B: Via Vercel CLI
+#### Option B: Vercel CLI
 
 ```bash
-# Instalar Vercel CLI (se não tiver)
+# Install the Vercel CLI if needed
 npm i -g vercel
 
-# Login
+# Authenticate
 vercel login
 
-# Adicionar variáveis
+# Add variables
 vercel env add NEXT_PUBLIC_SENTRY_DSN
-# Cole o DSN quando solicitado
+# Paste the DSN when prompted
 
-# Opcional: Adicionar outras variáveis
+# Optional variables
 vercel env add SENTRY_ORG
 vercel env add SENTRY_PROJECT
 vercel env add SENTRY_AUTH_TOKEN
@@ -96,144 +96,144 @@ vercel env add SENTRY_AUTH_TOKEN
 
 ---
 
-### 5. (Opcional) Obter Auth Token para Source Maps
+### 5. (Optional) Generate an Auth Token for Source Maps
 
-Source maps permitem ver código original nos erros (em vez de código minificado).
+Source maps let you inspect readable stack traces instead of minified bundles.
 
-1. No Sentry, vá em **Settings** → **Account** → **API** → **Auth Tokens**
-2. Clique em **"Create New Token"**
-3. Configurações:
+1. In Sentry, go to **Settings** → **Account** → **API** → **Auth Tokens**
+2. Click **"Create New Token"**
+3. Use these settings:
    - **Name**: `Vercel Deploy`
-   - **Scopes**: 
+   - **Scopes**:
      - ✅ `project:read`
      - ✅ `project:releases`
      - ✅ `org:read`
-4. Clique em **"Create Token"**
-5. **Copie o token** (não será mostrado novamente!)
-6. Adicione na Vercel como `SENTRY_AUTH_TOKEN`
+4. Click **"Create Token"**
+5. **Copy the token** (it is shown only once)
+6. Add it to Vercel as `SENTRY_AUTH_TOKEN`
 
 ---
 
-### 6. Deploy e Verificar
+### 6. Deploy and Verify
 
-1. Faça commit das mudanças:
+1. Commit your changes:
    ```bash
    git add .
-   git commit -m "feat: add Sentry monitoring"
+   git commit -m "feat: enable Sentry monitoring"
    git push origin main
    ```
 
-2. Aguarde o deploy na Vercel (1-2 minutos)
+2. Wait for the deployment to finish (usually 1-2 minutes)
 
-3. Visite seu site e navegue por algumas páginas
+3. Visit the site and browse a few pages
 
-4. No dashboard do Sentry, vá em **Issues** para ver se eventos estão chegando
+4. In the Sentry dashboard, open **Issues** to confirm events are arriving
 
 ---
 
-## ✅ Verificação de Funcionamento
+## ✅ Validate the Integration
 
-### Testar Error Tracking
+### Test Error Tracking
 
-Adicione temporariamente um erro de propósito:
+Temporarily trigger a controlled error:
 
 ```typescript
-// src/app/page.tsx (APENAS PARA TESTE)
+// src/app/page.tsx (TESTING ONLY)
 useEffect(() => {
-  // Forçar erro para testar Sentry
-  throw new Error('Sentry test error - DELETE ME');
+  // Force an error to verify Sentry wiring
+  throw new Error('Sentry test error - REMOVE AFTER TEST');
 }, []);
 ```
 
 1. Deploy
-2. Acesse a página
-3. No Sentry, vá em **Issues**
-4. Você deve ver o erro aparecer em segundos
-5. **IMPORTANTE**: Remova o erro de teste depois!
+2. Load the page
+3. In Sentry, open **Issues**
+4. You should see the error within seconds
+5. **IMPORTANT**: Remove the test error afterwards!
 
-### Testar Performance Monitoring
+### Test Performance Monitoring
 
-1. No Sentry, vá em **Performance**
-2. Navegue pelo seu site
-3. Você deve ver transações aparecendo:
+1. In Sentry, open **Performance**
+2. Navigate through the site
+3. You should see new transactions, including:
    - Page loads
    - Navigation timing
    - Web Vitals (LCP, FID, CLS)
 
-### Testar Session Replay
+### Test Session Replay
 
-1. No Sentry, vá em **Replays**
-2. Navegue pelo site e interaja
-3. Após alguns minutos, você deve ver sessões gravadas
-4. Clique para ver replay da navegação
+1. In Sentry, open **Replays**
+2. Interact with the site
+3. After a few minutes, session videos appear
+4. Click one to review the captured session
 
 ---
 
-## 🎨 Personalizar Configuração (Opcional)
+## 🎨 Optional Tuning
 
-### Ajustar Sample Rates
+### Adjust Sample Rates
 
-Edite `sentry.client.config.ts`:
+Edit `sentry.client.config.ts`:
 
 ```typescript
 Sentry.init({
   dsn: SENTRY_DSN,
-  
-  // Capturar 100% de erros
+
+  // Capture 100% of transactions
   tracesSampleRate: 1.0,
-  
-  // Session Replay
-  replaysOnErrorSampleRate: 1.0,  // 100% de sessões com erro
-  replaysSessionSampleRate: 0.1,  // 10% de sessões normais
-  
-  // Reduzir para economizar quota (se necessário)
-  // tracesSampleRate: 0.5,        // 50% de transactions
-  // replaysSessionSampleRate: 0.05, // 5% de sessões
+
+  // Session Replay sampling
+  replaysOnErrorSampleRate: 1.0,  // 100% of sessions with errors
+  replaysSessionSampleRate: 0.1,  // 10% of normal sessions
+
+  // Lower these if you need to conserve quota
+  // tracesSampleRate: 0.5,
+  // replaysSessionSampleRate: 0.05,
 });
 ```
 
-### Filtrar Erros Específicos
+### Filter Specific Errors
 
-Adicione filtros personalizados:
+Add custom filtering logic:
 
 ```typescript
 Sentry.init({
   beforeSend(event, hint) {
-    // Ignorar erros de extensões de browser
+    // Ignore browser extension noise
     if (
       hint.originalException?.message?.includes('chrome-extension://') ||
       hint.originalException?.message?.includes('moz-extension://')
     ) {
       return null;
     }
-    
-    // Ignorar erros 404
+
+    // Ignore benign 404s
     if (event.exception?.values?.[0]?.value?.includes('404')) {
       return null;
     }
-    
+
     return event;
   },
 });
 ```
 
-### Adicionar Contexto Customizado
+### Add Custom Context
 
 ```typescript
 import * as Sentry from '@sentry/nextjs';
 
-// Adicionar user context (se tiver autenticação)
+// Attach user context (if your site has authentication)
 Sentry.setUser({
   id: user.id,
   email: user.email,
   username: user.username,
 });
 
-// Adicionar tags customizadas
-Sentry.setTag('page_locale', 'pt-BR');
+// Add useful tags
+Sentry.setTag('page_locale', 'en-US');
 Sentry.setTag('theme', 'dark');
 
-// Adicionar contexto extra
+// Provide extra performance metrics
 Sentry.setContext('performance', {
   lcp: metrics.lcp,
   fid: metrics.fid,
@@ -243,114 +243,115 @@ Sentry.setContext('performance', {
 
 ---
 
-## 📊 Dashboard Recomendado
+## 📊 Recommended Dashboard Setup
 
-### Alerts para Configurar
+### Alerts to Configure
 
 1. **New Issue Alert**
-   - Notifica quando erro novo aparece
+   - Notifies when a new error appears
    - Settings → Alerts → Create Alert
    - Trigger: "A new issue is created"
-   - Action: Email
+   - Action: Email (and/or Slack)
 
 2. **Performance Degradation**
-   - Notifica quando performance cai
+   - Warns when transaction duration spikes
    - Trigger: "Transaction duration increases by 50%"
    - Action: Email
 
 3. **Error Rate Spike**
-   - Notifica quando taxa de erro aumenta
+   - Signals unexpected error volume
    - Trigger: "Error rate increases by 200%"
-   - Action: Email + Slack (opcional)
+   - Action: Email + Slack (optional)
 
-### Widgets Úteis
+### Helpful Widgets
 
-No dashboard customizado:
+In a custom dashboard, add:
 
-1. **Most Common Errors** - Top 5 erros por frequência
-2. **Error Rate Over Time** - Gráfico de linha
-3. **Performance Metrics** - LCP, FID, CLS
-4. **User Impact** - Quantos usuários afetados
+1. **Most Common Errors** – Top 5 errors by frequency
+2. **Error Rate Over Time** – Line chart of volume
+3. **Performance Metrics** – LCP, FID, CLS cards
+4. **User Impact** – Total affected users/sessions
 
 ---
 
-## 🔒 Boas Práticas de Segurança
+## 🔒 Security Best Practices
 
-### 1. Nunca Commitar Tokens
+### 1. Never Commit Keys or Tokens
 
-❌ **ERRADO**:
+❌ **Incorrect**:
 ```typescript
 const SENTRY_DSN = 'https://xxx@sentry.io/xxx'; // Hard-coded
 ```
 
-✅ **CORRETO**:
+✅ **Correct**:
 ```typescript
 const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 ```
 
-### 2. Mascarar Dados Sensíveis
+### 2. Strip Sensitive Data
 
 ```typescript
 Sentry.init({
   beforeSend(event) {
-    // Remover dados sensíveis
+    // Remove cookies from payloads
     if (event.request?.cookies) {
       delete event.request.cookies;
     }
-    
-    if (event.request?.headers?.['Authorization']) {
-      delete event.request.headers['Authorization'];
+
+    // Drop authorization headers
+    if (event.request?.headers?.Authorization) {
+      delete event.request.headers.Authorization;
     }
-    
+
     return event;
   },
 });
 ```
 
-### 3. Session Replay Masking
+### 3. Mask Session Replay Content
 
-Já configurado por padrão:
+Enabled by default in this template:
 
 ```typescript
 Sentry.replayIntegration({
-  maskAllText: true,      // Mascara todo texto
-  blockAllMedia: true,    // Bloqueia imagens/vídeos
-})
+  maskAllText: true,      // Obscures visible text
+  blockAllMedia: true,    // Blocks images and videos
+});
 ```
 
 ---
 
 ## 💡 Troubleshooting
 
-### Erro: "No DSN provided"
+### Error: "No DSN provided"
 
-**Causa**: Variável `NEXT_PUBLIC_SENTRY_DSN` não configurada
+**Cause**: `NEXT_PUBLIC_SENTRY_DSN` is missing
 
-**Solução**:
-1. Verifique `.env.local` (dev) ou Vercel (prod)
-2. Certifique-se que começa com `NEXT_PUBLIC_`
-3. Reinicie o servidor de dev: `npm run dev`
+**Fix**:
+1. Check `.env.local` (development) or Vercel (production)
+2. Confirm the variable starts with `NEXT_PUBLIC_`
+3. Restart the dev server with `npm run dev`
 
-### Erro: "Failed to upload source maps"
+### Error: "Failed to upload source maps"
 
-**Causa**: Auth token inválido ou faltando
+**Cause**: Invalid or missing auth token
 
-**Solução**:
-1. Gere novo auth token no Sentry
-2. Adicione `SENTRY_AUTH_TOKEN` na Vercel
-3. Verifique `SENTRY_ORG` e `SENTRY_PROJECT`
+**Fix**:
+1. Regenerate the token in Sentry
+2. Update `SENTRY_AUTH_TOKEN` in Vercel
+3. Verify `SENTRY_ORG` and `SENTRY_PROJECT`
 
-### Nenhum Evento Aparecendo
+### No Events Showing Up
 
-**Possíveis causas**:
-1. DSN incorreto - Verifique o formato
-2. Bloqueado por ad-blocker - Teste em aba anônima
-3. CSP bloqueando - Verifique `connect-src` no middleware
-4. Ambiente dev - Sentry só funciona em produção por padrão
+**Likely causes**:
+1. Incorrect DSN – verify the copy
+2. Blocked by ad blockers – test in a private window
+3. CSP blocking – review `connect-src` rules in middleware
+4. Development environment – Sentry reports production by default
 
-**Solução**:
+**Fix**:
 ```typescript
-// Forçar Sentry em dev (para testes)
+// Force Sentry in development (only while testing)
 if (process.env.NODE_ENV === 'development') {
   Sentry.init({ /* config */ });
 }
@@ -358,29 +359,29 @@ if (process.env.NODE_ENV === 'development') {
 
 ---
 
-## 📚 Recursos Adicionais
+## 📚 Additional Resources
 
-- **Documentação Oficial**: https://docs.sentry.io/platforms/javascript/guides/nextjs/
-- **Dashboard Sentry**: https://sentry.io/
+- **Official Docs**: https://docs.sentry.io/platforms/javascript/guides/nextjs/
+- **Sentry Dashboard**: https://sentry.io/
 - **API Reference**: https://docs.sentry.io/platforms/javascript/api/
 - **Best Practices**: https://docs.sentry.io/platforms/javascript/best-practices/
 
 ---
 
-## 🎯 Checklist Final
+## 🎯 Final Checklist
 
-- [ ] Conta no Sentry criada
-- [ ] Projeto Next.js criado no Sentry
-- [ ] DSN copiado
-- [ ] Variável `NEXT_PUBLIC_SENTRY_DSN` adicionada na Vercel
-- [ ] (Opcional) Auth token gerado e adicionado
-- [ ] Deploy realizado
-- [ ] Erro de teste funcionou
-- [ ] Eventos aparecendo no dashboard
-- [ ] Alerts configurados
+- [ ] Sentry account created
+- [ ] Next.js project created in Sentry
+- [ ] DSN copied
+- [ ] `NEXT_PUBLIC_SENTRY_DSN` added to the environment
+- [ ] (Optional) Auth token generated and stored
+- [ ] Deployment completed
+- [ ] Test error confirmed in Issues
+- [ ] Events visible in Performance/Replays
+- [ ] Alerts configured
 
 ---
 
-**Monitoramento profissional em 5 minutos.** 🔍
+**Production-grade monitoring in minutes.** 🔍
 
-**Quota gratuita suficiente para ~1000 visitantes/mês.** ✅
+**Free tier comfortably supports ~1,000 monthly visitors.** ✅

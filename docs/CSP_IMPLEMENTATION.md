@@ -1,216 +1,135 @@
-# CSP Implementation Notes
+# Content Security Policy Implementation
 
-## Current Status: Pragmatic Approach
-
-### What We Implemented
-
-✅ **JSON Sanitization** - Prevents XSS in structured data  
-✅ **Security Headers** - X-Frame-Options, X-Content-Type-Options, etc.  
-✅ **CSP Base Policy** - Restrictive policy with necessary allowances  
-⚠️ **Nonce-based CSP** - Partially implemented (challenges explained below)
+This document explains how the cybersecurity portfolio template enforces its Content Security Policy (CSP), how nonces are propagated through the rendering pipeline, and how to extend the policy safely.
 
 ---
 
-## Why Not Full Nonce-based CSP?
+## 1. Current Implementation (Next.js 15)
 
-### Technical Limitations
+The template ships with a strict nonce-based CSP that avoids `unsafe-inline` and `unsafe-eval` in production builds. The policy is generated in `src/middleware.ts` and uses the automatic nonce injection that is available in Next.js 15.
 
-**Next.js 14 doesn't support automatic nonce injection** into framework scripts:
+Key characteristics:
+
+- Cryptographically secure nonce generated per request (`crypto.randomUUID` → base64 encoded)
+- `strict-dynamic` trusts scripts that are bootstrapped by the original nonce-bearing scripts
+- Analytics domains (`va.vercel-scripts.com`, `vercel.live`) and Sentry ingestion are explicitly allowed
+- Styles also receive a nonce so inline `<style>` tags can execute without falling back to `unsafe-inline`
+- Development mode keeps a relaxed policy to support React Fast Refresh and source maps
+
+### Production Policy Snapshot
+
+```text
+default-src 'self';
+script-src 'self' 'nonce-{nonce}' 'strict-dynamic' https://va.vercel-scripts.com https://vercel.live;
+style-src 'self' 'nonce-{nonce}' https://fonts.googleapis.com;
+style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
+style-src-attr 'self' 'unsafe-inline';
+img-src 'self' blob: data: https:;
+font-src 'self' https://fonts.gstatic.com;
+connect-src 'self' https://vitals.vercel-insights.com https://vercel.live https://*.ingest.sentry.io;
+media-src 'self';
+object-src 'none';
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+upgrade-insecure-requests;
+block-all-mixed-content;
+```
+
+### Development Policy Snapshot
+
+```text
+default-src 'self';
+script-src 'self' 'unsafe-eval' 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
+style-src-attr 'self' 'unsafe-inline';
+img-src 'self' blob: data: https:;
+font-src 'self' https://fonts.gstatic.com;
+connect-src 'self' ws: wss: https://vitals.vercel-insights.com https://*.ingest.sentry.io;
+```
+
+---
+
+## 2. How the Nonce Flows
+
+1. **Middleware** generates the nonce and appends it to both the request header (`x-nonce`) and the response `Content-Security-Policy` header.
+2. **App Router Layout** retrieves the nonce via `headers().get('x-nonce')` and passes it to inline JSON-LD `<script>` tags.
+3. **Next.js 15 runtime** automatically applies the same nonce to all framework-managed scripts, so no additional wiring is required for hydration bundles.
+
+Relevant excerpts:
 
 ```typescript
-// This works for custom scripts:
-<script nonce={nonce}>console.log('hello')</script>
+// src/middleware.ts
+const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
+requestHeaders.set('x-nonce', nonce);
+response.headers.set('Content-Security-Policy', cspHeader);
 
-// But Next.js framework scripts don't get the nonce:
-// ❌ _next/static/chunks/webpack-*.js
-// ❌ _next/static/chunks/main-*.js
-// ❌ React Fast Refresh scripts
-```
+// src/app/layout.tsx
+const nonce = process.env.NODE_ENV === 'production'
+  ? (await headers()).get('x-nonce') || undefined
+  : undefined;
 
-### The Problem
-
-When using strict nonce-based CSP without `unsafe-inline`:
-- ❌ Next.js scripts get blocked
-- ❌ React Fast Refresh doesn't work
-- ❌ Page renders blank (just background)
-- ❌ No hydration occurs
-
-### Current CSP Policy (Pragmatic)
-
-```csp
-script-src 'self' 'unsafe-inline' 'unsafe-eval' 
-  https://va.vercel-scripts.com 
-  https://vercel.live;
-```
-
-**Why This Is Still Secure**:
-
-1. **`'self'`** - Only allows scripts from same origin
-2. **`'unsafe-inline'`** - Required for Next.js framework
-3. **`'unsafe-eval'`** - Required for development (React Fast Refresh)
-4. **Vercel domains** - Required for Analytics & Speed Insights
-5. **XSS Protection** - Still have DOMPurify + JSON sanitization
-
-**Security Score**: Still **95-98/100** ✅
-
----
-
-## What We DO Have (Strong Protection)
-
-### 1. Input Sanitization
-```typescript
-// All user content sanitized
-const sanitizedCode = DOMPurify.sanitize(code, {
-  ALLOWED_TAGS: [],
-  ALLOWED_ATTR: [],
-  KEEP_CONTENT: true
-});
-```
-
-### 2. JSON-LD Protection
-```typescript
-// Structured data XSS prevention
-export function sanitizeJSON(data: unknown): string {
-  return JSON.stringify(data)
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/&/g, '\\u0026');
-}
-```
-
-### 3. Path Traversal Prevention
-```typescript
-// Triple validation
-if (!isValidSlug(slug)) throw new Error('Invalid slug');
-if (normalizedPath.includes('..')) throw new Error('Path traversal');
-if (!existsSync(fullPath)) throw new Error('Not found');
-```
-
-### 4. Static Site Generation
-- No server-side code execution
-- Pre-rendered HTML
-- No SQL injection vectors
-- No authentication bypasses
-
----
-
-## Future: Full Nonce CSP (Next.js 15+)
-
-### When Next.js Supports It
-
-```typescript
-// middleware.ts (Future)
-export default function middleware(req: NextRequest) {
-  const nonce = crypto.randomUUID();
-  const res = NextResponse.next();
-  
-  res.headers.set('x-nonce', nonce);
-  res.headers.set('Content-Security-Policy', `
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
-  `);
-  
-  return res;
-}
-
-// layout.tsx (Future)
-import { headers } from 'next/headers';
-
-export default async function RootLayout({ children }) {
-  const nonce = headers().get('x-nonce');
-  
-  // Next.js will automatically inject nonce into all scripts
-  return (
-    <html>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-### Migration Path
-
-1. **Monitor Next.js Releases** - Check for nonce support
-2. **Test in Canary** - Try Next.js 15 canary versions
-3. **Update Middleware** - Enable strict nonce CSP
-4. **Remove unsafe-inline** - Clean up CSP policy
-5. **Test Thoroughly** - Ensure all scripts work
-
----
-
-## Alternative: Hash-based CSP
-
-### If Nonce Doesn't Work
-
-```typescript
-// Calculate hashes of inline scripts
-const script = `console.log('hello')`;
-const hash = crypto.createHash('sha256')
-  .update(script)
-  .digest('base64');
-
-// Add to CSP
-const csp = `script-src 'self' 'sha256-${hash}'`;
-```
-
-**Problem**: Requires calculating hashes for ALL inline scripts (including Next.js framework scripts).
-
----
-
-## Recommendation for Template Users
-
-### Development (Current Setup)
-```csp
-script-src 'self' 'unsafe-inline' 'unsafe-eval';
-```
-
-### Production (Current Setup)
-```csp
-script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com;
-```
-
-### Future (When Available)
-```csp
-script-src 'self' 'nonce-{random}' 'strict-dynamic';
+<script
+  type="application/ld+json"
+  {...(nonce && { nonce })}
+  dangerouslySetInnerHTML={{ __html: sanitizeJSON(personSchema) }}
+/>
 ```
 
 ---
 
-## What You Should Know
+## 3. Allowing Additional Scripts
 
-### This Is NOT A Security Issue
+When you need to introduce another script source (for example a security scanner widget or privacy-friendly analytics vendor):
 
-**For static portfolios**:
-- ✅ No user-generated content
-- ✅ No database injections
-- ✅ No authentication bypasses
-- ✅ All content controlled by you
-- ✅ DOMPurify protects blog content
-- ✅ JSON sanitization protects metadata
+1. **Prefer nonce usage**. If the provider supports inline snippets, inject the nonce attribute onto the `<script>` tag you add in `layout.tsx`.
+2. **Add hostnames to the CSP**. Extend the `script-src` directive inside `middleware.ts` so the remote host is explicitly whitelisted.
+3. **Avoid `unsafe-inline`**. Only fall back to the development policy if the third-party vendor has no nonce support and you are comfortable with the associated risk.
 
-**Attack Surface**: ~5% (only blog MDX files you control)
+Example of whitelisting an additional analytics endpoint:
 
-### When To Upgrade
-
-Consider strict nonce CSP if:
-- ❌ Allowing user uploads
-- ❌ Handling payment data
-- ❌ Multi-tenant application
-- ❌ User authentication system
-
-For portfolio template:
-- ✅ **Current CSP is sufficient** ✅
+```diff
+- script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://va.vercel-scripts.com https://vercel.live;
++ script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://va.vercel-scripts.com https://vercel.live https://analytics.example.com;
+```
 
 ---
 
-## References
+## 4. Updating Style and Font Sources
 
-- [Next.js CSP Documentation](https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy)
-- [MDN CSP Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [OWASP CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
-- [Next.js Security Best Practices](https://nextjs.org/docs/app/building-your-application/security)
+The production policy applies the nonce to `style-src`. This covers inline critical CSS and the JSON-LD `<style>` tags emitted by Next.js. If you introduce hosted fonts or CSS frameworks:
+
+- Add the CDN domain to `style-src` and `style-src-elem`.
+- Mirror font providers inside `font-src`.
+- If the provider injects inline styles that do not accept nonces, evaluate whether the styles can be self-hosted instead of enabling `unsafe-inline`.
 
 ---
 
-**Status**: ✅ Production-ready with pragmatic security approach
+## 5. Testing the Policy
 
-**Security Score**: 95-98/100 (not affected by CSP limitations)
+1. Run `npm run build && npm start` to launch the production server locally.
+2. Inspect headers with `curl -I http://localhost:3000 | findstr Content-Security-Policy` (PowerShell) to confirm the nonce changes per request.
+3. Open the browser dev tools → Console → look for CSP violation warnings when visiting each route.
+4. If you add new assets or analytics tools, repeat the inspection to ensure no requests are blocked.
+
+---
+
+## 6. Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|--------------|-----|
+| Blank screen in production | Script request blocked by CSP | Add host to `script-src` or pass the nonce attribute correctly |
+| Inline script ignored | Missing `nonce` attribute | Retrieve the nonce in the component and set `nonce={nonce}` |
+| Styles missing | New stylesheet host not in `style-src` | Append domain to `style-src` and `style-src-elem` directives |
+| Web Vitals or Sentry offline | `connect-src` missing endpoint | Extend `connect-src` with the required origin |
+
+---
+
+## 7. Reference Material
+
+- Next.js Content Security Policy guide: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
+- MDN CSP Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+- OWASP CSP Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+
+Last updated: October 16, 2025

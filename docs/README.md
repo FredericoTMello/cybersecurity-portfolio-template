@@ -1,4 +1,4 @@
-# zer0spin Portfolio - Documentation
+# Cybersecurity Portfolio Template - Documentation
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
@@ -23,7 +23,7 @@
 
 ## 🎯 Project Overview
 
-zer0spin Portfolio is a **modern, high-performance portfolio template** built specifically for cybersecurity professionals, featuring:
+This is a **modern, high-performance portfolio template** built specifically for cybersecurity professionals, featuring:
 
 - ✅ **100% Static Site Generation (SSG)** - Zero runtime vulnerabilities
 - 🔒 **Security-Hardened** - CSP, HSTS, XSS protection, sanitized content
@@ -41,7 +41,7 @@ zer0spin Portfolio is a **modern, high-performance portfolio template** built sp
 ### Core Framework
 ```json
 {
-  "framework": "Next.js 14.2",
+  "framework": "Next.js 15.5",
   "rendering": "Static Site Generation (SSG)",
   "language": "TypeScript 5.5",
   "styling": "Tailwind CSS 3.4"
@@ -51,15 +51,15 @@ zer0spin Portfolio is a **modern, high-performance portfolio template** built sp
 ### Key Dependencies
 | Package | Version | Purpose |
 |---------|---------|---------|
-| `next` | 14.2.0 | React framework with App Router |
-| `react` | 18.3.0 | UI library |
-| `typescript` | 5.5.0 | Type safety |
-| `tailwindcss` | 3.4.0 | Utility-first CSS |
-| `framer-motion` | 11.2.0 | Animations |
-| `next-mdx-remote` | 4.4.1 | MDX content rendering |
-| `gray-matter` | 4.0.3 | Frontmatter parsing |
-| `lucide-react` | 0.394.0 | Icon library |
-| `isomorphic-dompurify` | 2.28.0 | XSS sanitization |
+| `next` | 15.5 | React framework with App Router |
+| `react` | 19.0 | UI library |
+| `typescript` | 5.5 | Type safety |
+| `tailwindcss` | 3.4 | Utility-first CSS |
+| `framer-motion` | 11.2 | Animations |
+| `next-mdx-remote` | 4.4 | MDX content rendering |
+| `gray-matter` | 4.0 | Frontmatter parsing |
+| `lucide-react` | 0.469 | Icon library |
+| `isomorphic-dompurify` | 2.28 | XSS sanitization |
 
 ---
 
@@ -113,7 +113,7 @@ zer0spin Portfolio is a **modern, high-performance portfolio template** built sp
 ## 📂 Project Structure
 
 ```
-zer0spin/
+cybersecurity-portfolio-template/
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── layout.tsx          # Root layout with SEO
@@ -166,12 +166,12 @@ zer0spin/
 
 ```bash
 # Option A: Use GitHub template via degit
-npx degit zer0spin/zer0spin my-portfolio
+npx degit zer0spin/cybersecurity-portfolio-template my-portfolio
 cd my-portfolio
 
 # Option B: Traditional clone
-git clone https://github.com/zer0spin/zer0spin.git
-cd zer0spin
+git clone https://github.com/zer0spin/cybersecurity-portfolio-template.git
+cd cybersecurity-portfolio-template
 
 # Install dependencies
 npm install
@@ -213,7 +213,7 @@ Optimizations in place include static generation, dynamic imports for below-the-
 ## 🔒 Security Features
 
 ### Implemented
-✅ Content Security Policy (CSP) with script-src 'self'  
+✅ Content Security Policy (CSP) with per-request nonce enforcement  
 ✅ HTTP Strict Transport Security (HSTS)  
 ✅ X-Frame-Options: DENY  
 ✅ X-Content-Type-Options: nosniff  
@@ -338,12 +338,13 @@ Built with inspiration from:
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/zer0spin/zer0spin/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/zer0spin/discussions)
-- **Email**: Contact via the portfolio contact form
+- **Issues**: [GitHub Issues](https://github.com/zer0spin/cybersecurity-portfolio-template/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/cybersecurity-portfolio-template/discussions)
+- **Maintainer**: Reach out to Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) via issues/discussions for questions
+- **Email**: zer0spinsec@proton.me for private security disclosures
 
 ---
 
-**Built with 💙 by [zer0spin](https://github.com/zer0spin)**
+**Maintained by Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) with contributions from the cybersecurity community.**
 
-*Last updated: October 14, 2025*
+*Last updated: October 16, 2025*

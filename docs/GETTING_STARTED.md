@@ -4,7 +4,7 @@
 ![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)
 
-**Complete setup guide for deploying the zer0spin portfolio template**
+**Complete setup guide for deploying the Cybersecurity Portfolio Template**
 
 ---
 
@@ -32,13 +32,14 @@ git --version   # Any recent version
 ### 1. Clone the Repository
 
 ```bash
-# Option A: start from the GitHub template
-npx degit zer0spin/zer0spin my-blue-team-portfolio
-cd my-blue-team-portfolio
+# Option A: Use GitHub template (recommended)
+# Click "Use this template" on GitHub, then clone your new repository:
+git clone https://github.com/<your-username>/<your-portfolio-repo>.git
+cd <your-portfolio-repo>
 
-# Option B: clone directly
-git clone https://github.com/zer0spin/zer0spin.git
-cd zer0spin
+# Option B: Clone directly from the canonical repository
+git clone https://github.com/zer0spin/cybersecurity-portfolio-template.git
+cd cybersecurity-portfolio-template
 ```
 
 ### 2. Install Dependencies
@@ -501,8 +502,9 @@ After basic setup:
 ## 🆘 Getting Help
 
 - **Documentation**: Check other docs in `/docs` folder
-- **Issues**: [GitHub Issues](https://github.com/zer0spin/zer0spin/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/zer0spin/discussions)
+- **Issues**: [GitHub Issues](https://github.com/zer0spin/cybersecurity-portfolio-template/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/zer0spin/cybersecurity-portfolio-template/discussions)
+- **Maintainer**: Contact Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) via issues/discussions for questions; email [zer0spinsec@proton.me](mailto:zer0spinsec@proton.me) for private disclosures
 - **Next.js Docs**: [nextjs.org/docs](https://nextjs.org/docs)
 
 ---
@@ -519,4 +521,6 @@ After basic setup:
 
 **Ready to build something amazing!** 🚀
 
-*Last updated: October 14, 2025*
+**Maintained by Marcos Oliveira ([@zer0spin](https://github.com/zer0spin)) with contributions from the cybersecurity community.**
+
+*Last updated: October 16, 2025*

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { siteConfig } from '@/config/site.config';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog');
 
@@ -123,7 +124,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       date: data.date,
       readTime,
       category: data.category,
-      author: data.author || 'Marcos Oliveira',
+  author: data.author || siteConfig.author.name,
       featured: data.featured || false,
       coverImage: data.coverImage,
       tags: data.tags || [],

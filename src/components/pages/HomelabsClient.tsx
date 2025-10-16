@@ -77,7 +77,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               transition={{ delay: 0.25 }}
               className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-white"
             >
-              zer0spin Home Labs
+              Home Labs
             </m.h2>
             <m.p
               initial={{ opacity: 0, y: 12 }}

@@ -9,6 +9,7 @@ import { getLabBySlug, getAllLabSlugs } from '@/lib/homelabs';
 import { CodeBlock } from '@/components/ui';
 import { formatDate } from '@/lib/date-utils';
 import { generateSEO, generateBlogPostSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { siteConfig } from '@/config/site.config';
 import '@/styles/code-highlight.css';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -146,7 +147,7 @@ export default async function HomelabPage({ params }: { params: Promise<{ slug: 
     url: `/homelabs/${slug}`,
     image: lab.coverImage,
     publishedTime: lab.date,
-    author: 'Marcos Oliveira',
+  author: siteConfig.author.name,
     tags: lab.tags,
   });
 

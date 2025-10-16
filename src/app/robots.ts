@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/config/site.config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -19,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/'],
       },
     ],
-    sitemap: 'https://zer0spin.com/sitemap.xml',
-    host: 'https://zer0spin.com',
+    sitemap: `${siteConfig.urls.canonical}/sitemap.xml`,
+    host: siteConfig.urls.canonical,
   };
 }

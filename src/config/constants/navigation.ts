@@ -83,21 +83,21 @@ export const SOCIAL_ITEMS: NavItem[] = [
     icon: Linkedin,
     label: 'LinkedIn',
     isExternal: true,
-    href: 'https://linkedin.com/in/marcos-oliveira-infosec'
+    href: 'https://linkedin.com/in/your-linkedin-username'
   },
   {
     id: 'github',
     icon: Github,
     label: 'GitHub',
     isExternal: true,
-    href: 'https://github.com/zer0spin'
+    href: 'https://github.com/yourusername'
   },
   {
     id: 'twitter',
     icon: Twitter,
     label: 'X (Twitter)',
     isExternal: true,
-    href: 'https://twitter.com/zer0spin'
+    href: 'https://twitter.com/yourusername'
   },
 ];
 

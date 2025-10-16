@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getAllPostSlugs } from '@/lib/blog';
 import { getAllLabSlugs } from '@/lib/homelabs';
+import { siteConfig } from '@/config/site.config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://zer0spin.com';
+  const baseUrl = siteConfig.urls.canonical;
   
   // Get all blog post slugs
   const blogSlugs = getAllPostSlugs();
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+  url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,

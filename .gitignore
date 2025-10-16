@@ -12,6 +12,12 @@
 # next.js
 /.next/
 /out/
+/.turbo/
+
+# editors
+.idea/
+.vscode/
+*.code-workspace
 
 # production
 /build
@@ -31,6 +37,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+.claude/
 
 # typescript
 *.tsbuildinfo
@@ -48,15 +55,12 @@ CUSTOMIZATION.md
 QUICKSTART.md
 PERFORMANCE_OPTIMIZATIONS.md
 
-# IDE
-.vscode/
-.idea/
+# editor caches
 *.swp
 *.swo
 *~
+.fleet/
 
 # OS
 .DS_Store
 Thumbs.db
-
-.vercel

@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react';
 import { m } from 'framer-motion';
-import { Calendar, Shield, Settings, User, ArrowRight } from 'lucide-react';
+import { Calendar, Shield, Settings, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface Experience {
@@ -17,68 +17,63 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    title: 'Information Security Analyst',
-    company: (
-      <>
-        Freelancer for{' '}
-        <a
-          href="https://opsecurity.com.br/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-red-400 hover:text-red-300 transition-colors font-semibold"
-        >
-          OP Security
-        </a>
-      </>
-    ),
-    period: 'Apr 2024 - Present',
-    description: 'I leverage penetration testing results to understand attacker tactics, techniques, and procedures (TTPs), translating offensive findings into actionable defense strategies and mapping vulnerabilities to the MITRE ATT&CK framework.',
+    title: 'Blue Team Security Specialist',
+    company: <span>TechCorp Security · Full-time</span>,
+    period: 'Jan 2024 - Present',
+    description: 'Lead defensive security operations including threat detection, incident response, and security monitoring. Design and implement detection rules, conduct threat hunting, and mentor junior analysts in Blue Team methodologies.',
     icon: <Shield size={20} />,
-    companyClassName: 'text-cyber-gray-light',
     achievements: [
-      'Authored detailed technical reports from penetration test results, detailing vulnerabilities, exploitation methodologies, and mitigation recommendations.',
-      'Analyzed and interpreted data from scanning tools (e.g., Nmap, Nessus, Burp Suite) to identify security flaws in web applications and systems.',
-      'Classified and prioritized vulnerabilities using the CVSS framework to provide clear guidance for development and infrastructure teams.',
-      'Open-source project developer for Brazilian cybersecurity community',
-      'Researched and documented known vulnerabilities (CVEs) related to analyzed environments, providing context and outlining associated risks.',
-      'Translated complex technical security flaws into comprehensible business risks for stakeholders.'    ]
-  },
-  {
-    title: 'Computational Thinking & Logic Instructor',
-    company: <span>União School · Full-time</span>,
-    period: 'Jan 2024 - May 2025',
-    description: 'This role involved deconstructing complex technical concepts to build foundational problem-solving skills for a wide range of audiences, from early childhood to high school.',
-    icon: <User size={20} />,
-    achievements: [
-      'Planned and executed a comprehensive Computational Thinking curriculum (MindMakers/Anglo platform) for students across all educational stages, from elementary to high school.',
-      'Developed project-based learning modules focused on programming, educational robotics, and the fundamentals of logic.',
-      'Mentored and guided student teams for science and technology fairs, overseeing projects from conception to presentation.',
-      'Developed problem-solving frameworks for diverse learning styles'
+      'Designed and deployed 50+ custom SIEM detection rules reducing MTTD by 40%',
+      'Led incident response for 100+ security incidents with 98% successful resolution rate',
+      'Implemented automated threat hunting workflows using Python and Splunk SPL',
+      'Developed security playbooks for ransomware, phishing, and insider threat scenarios',
+      'Conducted regular purple team exercises to validate detection capabilities',
+      'Mentored 3 junior SOC analysts in threat detection and incident response'
     ]
   },
   {
-    title: 'Physics & Mathematics Instructor / Digital Content Creator',
-    company: <span>Independent · Remote</span>,
-    period: 'Jan 2018 - Present',
-    description: 'Alongside my work in security, I have a long-standing role in applying and teaching the foundational principles of Physics and Mathematics. This involves mentoring students in advanced problem-solving and translating complex scientific concepts into engaging digital content for a broad audience.',
-    icon: <User size={20} />,
+    title: 'SOC Analyst Level 2',
+    company: <span>Global Finance Corp · Full-time</span>,
+    period: 'Jun 2022 - Dec 2023',
+    description: 'Advanced security monitoring and incident investigation in a 24/7 SOC environment. Performed deep-dive analysis of security alerts, threat intelligence integration, and coordination with security teams for incident containment.',
+    icon: <Shield size={20} />,
     achievements: [
-      'Applied advanced principles of Physics and Mathematics to mentor students for competitive university entrance exams and public contests.',
-      'Developed and produced educational content for digital platforms including YouTube, Instagram, and TikTok, specializing in the distillation of complex scientific topics for a diverse online audience.',
-      'Gained extensive experience in the full lifecycle of digital lesson production, from conception and scripting to recording and editing.',
-      'Provided tailored support and managed communications with all stakeholders (students and parents) to ensure educational goals were met.'
+      'Triaged and investigated 500+ security incidents across SIEM, EDR, and network tools',
+      'Reduced false positive rate by 35% through alert tuning and correlation rules',
+      'Integrated threat intelligence feeds (MISP, AlienVault OTX) with SIEM platform',
+      'Created comprehensive incident reports for management and compliance teams',
+      'Performed malware analysis and forensic investigation of compromised systems',
+      'Developed documentation and training materials for L1 analysts'
     ]
   },
   {
-    title: 'Technical Translator (English)',
-    company: <span>Intercom Technical Translations</span>,
-    period: 'Jan 2017 - Jan 2019',
-    description: 'This role was foundational in developing the meticulous attention to detail required for security analysis. It involved translating and reviewing highly specialized documentation where precision and confidentiality were critical.',
+    title: 'SOC Analyst Level 1',
+    company: <span>CyberDefense Solutions · Full-time</span>,
+    period: 'Mar 2021 - May 2022',
+    description: 'First-line security monitoring and alert triage in enterprise SOC. Monitored security events from SIEM, firewalls, IDS/IPS, and endpoint protection platforms. Escalated confirmed incidents to senior analysts.',
     icon: <Settings size={20} />,
     achievements: [
-      'Translated and revised highly technical documents, requiring extreme accuracy and a deep understanding of complex, domain-specific terminology.',
-      'Utilized specialized translation software (Trados) to ensure consistency and accuracy while handling sensitive information.',
-      'Performed document layout and formatting to produce polished, professional-grade final reports for clients.'  
+      'Monitored and triaged 1000+ daily security alerts across multiple platforms',
+      'Achieved 95% SLA compliance for alert response times',
+      'Identified and escalated 50+ confirmed security incidents',
+      'Performed initial containment actions for phishing and malware incidents',
+      'Maintained detailed incident documentation and tracking in SOAR platform',
+      'Completed SANS SEC401 training and applied learnings to daily operations'
+    ]
+  },
+  {
+    title: 'IT Support Specialist / Junior Security Analyst',
+    company: <span>Enterprise Tech Services · Full-time</span>,
+    period: 'Aug 2019 - Feb 2021',
+    description: 'Provided technical support while transitioning to security role. Gained hands-on experience with security tools, vulnerability management, and basic incident response. Supported security team with log analysis and security patching.',
+    icon: <Settings size={20} />,
+    achievements: [
+      'Resolved 200+ IT support tickets monthly with 98% satisfaction rating',
+      'Assisted security team with vulnerability scanning and patch management',
+      'Performed basic log analysis for security investigations',
+      'Deployed security agents (EDR, DLP) across 500+ endpoints',
+      'Created user security awareness training materials',
+      'Obtained CompTIA Security+ certification while working full-time'
     ]
   }
 ];

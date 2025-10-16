@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { siteConfig } from '@/config/site.config';
+import { socialConfig } from '@/config/social.config';
 
 interface SEOConfig {
   title: string;
@@ -11,15 +13,22 @@ interface SEOConfig {
   tags?: string[];
 }
 
+const authorName = siteConfig.author.name;
+const authorHandle = siteConfig.codename || siteConfig.author.codename;
+const canonicalUrl = siteConfig.urls.canonical;
+
 const defaultSEO = {
-  siteName: 'zer0spin - Blue Team Cybersecurity',
-  defaultTitle: 'Marcos Oliveira (zer0spin) - Blue Team Cybersecurity Professional',
-  defaultDescription: 'Defending systems. Connecting people. Inspiring the next generation of Blue Team. Professional portfolio of Marcos Oliveira, specialist in Blue Team operations, defensive cybersecurity, SIEM, SOC, and incident response.',
-  baseUrl: 'https://zer0spin.com',
-  defaultImage: '/images/site/og-default.png',
-  twitter: '@zer0spin',
-  linkedin: 'marcos-oliveira-infosec',
-  github: 'zer0spin',
+  siteName: siteConfig.name,
+  defaultTitle: siteConfig.seo.title,
+  defaultDescription: siteConfig.seo.description,
+  baseUrl: canonicalUrl,
+  defaultImage: siteConfig.defaultImage,
+  twitterHandle: socialConfig.twitter?.handle ?? '@your-twitter-handle',
+  twitterUsername: socialConfig.twitter?.username ?? 'your-twitter-handle',
+  linkedinUsername: socialConfig.linkedin?.username ?? 'your-linkedin-username',
+  githubUsername: socialConfig.github?.username ?? 'your-github-username',
+  authorName,
+  authorHandle,
 };
 
 export function generateSEO({
@@ -32,7 +41,7 @@ export function generateSEO({
   author,
   tags = [],
 }: SEOConfig): Metadata {
-  const fullTitle = title === defaultSEO.defaultTitle ? title : `${title} | zer0spin`;
+  const fullTitle = title === defaultSEO.defaultTitle ? title : `${title} | ${defaultSEO.authorName}`;
   const fullUrl = `${defaultSEO.baseUrl}${url || '/'}`;
   const relativeImage = image || defaultSEO.defaultImage;
   const ogImage = relativeImage.startsWith('http') ? relativeImage : `${defaultSEO.baseUrl}${relativeImage}`;
@@ -48,19 +57,19 @@ export function generateSEO({
     'incident response',
     'threat hunting',
     'security operations',
-    'Marcos Oliveira',
-    'zer0spin',
+    defaultSEO.authorName,
+    defaultSEO.authorHandle,
   ];
 
-  const allKeywords = [...baseKeywords, ...tags];
+  const allKeywords = Array.from(new Set([...baseKeywords, ...tags]));
 
   return {
     title: fullTitle,
     description,
     keywords: allKeywords,
-    authors: [{ name: author || 'Marcos Oliveira' }],
-    creator: 'Marcos Oliveira',
-    publisher: 'Marcos Oliveira',
+    authors: [{ name: author || defaultSEO.authorName }],
+    creator: defaultSEO.authorName,
+    publisher: defaultSEO.authorName,
     robots: {
       index: true,
       follow: true,
@@ -75,7 +84,6 @@ export function generateSEO({
     openGraph: {
       type,
       locale: 'en_US',
-      alternateLocale: ['pt_BR'],
       url: fullUrl,
       siteName: defaultSEO.siteName,
       title: fullTitle,
@@ -94,8 +102,8 @@ export function generateSEO({
     },
     twitter: {
       card: 'summary_large_image',
-      site: defaultSEO.twitter,
-      creator: defaultSEO.twitter,
+      site: defaultSEO.twitterHandle,
+      creator: defaultSEO.twitterHandle,
       title: fullTitle,
       description,
       images: [ogImage],
@@ -104,7 +112,6 @@ export function generateSEO({
       canonical: fullUrl,
       languages: {
         'en-US': fullUrl,
-        'pt-BR': fullUrl,
       },
     },
     verification: {
@@ -122,39 +129,25 @@ export function generatePersonSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Marcos Oliveira',
-    alternateName: 'zer0spin',
+    name: defaultSEO.authorName,
+    alternateName: defaultSEO.authorHandle,
     url: defaultSEO.baseUrl,
-    image: `${defaultSEO.baseUrl}/images/about/zer0spin.png`,
+    image: `${defaultSEO.baseUrl}${siteConfig.defaultImage}`,
     sameAs: [
-      `https://twitter.com/${defaultSEO.twitter.replace('@', '')}`,
-      `https://linkedin.com/in/${defaultSEO.linkedin}`,
-      `https://github.com/${defaultSEO.github}`,
+      `https://twitter.com/${defaultSEO.twitterUsername}`,
+      `https://linkedin.com/in/${defaultSEO.linkedinUsername}`,
+      `https://github.com/${defaultSEO.githubUsername}`,
     ],
-    jobTitle: 'Blue Team Cybersecurity Specialist',
+    jobTitle: siteConfig.author.jobTitle,
     worksFor: {
       '@type': 'Organization',
-      name: 'Independent',
+      name: siteConfig.author.organization,
     },
-    knowsAbout: [
-      'Cybersecurity',
-      'Blue Team Operations',
-      'SIEM',
-      'Incident Response',
-      'Threat Hunting',
-      'Security Operations Center',
-      'Defensive Security',
-    ],
-    alumniOf: [
-      {
-        '@type': 'EducationalOrganization',
-        name: 'Universidade Federal de Uberlândia',
-      },
-      {
-        '@type': 'EducationalOrganization',
-        name: 'Centro Universitário Estácio de Sá',
-      },
-    ],
+    knowsAbout: siteConfig.expertise,
+    alumniOf: siteConfig.education.map((education) => ({
+      '@type': education.type ?? 'EducationalOrganization',
+      name: education.name,
+    })),
   };
 }
 
@@ -168,8 +161,8 @@ export function generateWebsiteSchema() {
     inLanguage: 'en-US',
     author: {
       '@type': 'Person',
-      name: 'Marcos Oliveira',
-      alternateName: 'zer0spin',
+      name: defaultSEO.authorName,
+      alternateName: defaultSEO.authorHandle,
     },
     potentialAction: {
       '@type': 'SearchAction',
@@ -217,10 +210,10 @@ export function generateBlogPostSchema({
     },
     publisher: {
       '@type': 'Person',
-      name: 'Marcos Oliveira',
+      name: defaultSEO.authorName,
       logo: {
         '@type': 'ImageObject',
-        url: `${defaultSEO.baseUrl}/images/about/zer0spin.png`,
+        url: `${defaultSEO.baseUrl}${siteConfig.defaultImage}`,
       },
     },
     mainEntityOfPage: {
@@ -275,7 +268,7 @@ export function generateProjectSchema({
     ...(keywords && { keywords: keywords.join(', ') }),
     author: {
       '@type': 'Person',
-      name: 'Marcos Oliveira',
+      name: defaultSEO.authorName,
       url: defaultSEO.baseUrl,
     },
   };

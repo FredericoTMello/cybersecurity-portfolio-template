@@ -28,7 +28,7 @@ const educationData: Education[] = [
   // Academic Degrees
   {
     title: 'Bachelor in Computer Science or Cybersecurity',
-    organization: 'Probably some public university',
+    organization: 'University of Cambridge',
     description: 'My plan is to start another degree next year to improve my academic and technological foundation. I plan to pursue a degree in Computer Science because I enjoy the fundamental and more abstract knowledge (in this case, I\'ll focus on a postgraduate degree in Cybersecurity), but depending on opportunities, I may pursue a cybersecurity degree directly.',
     period: '2026 - 2030 (Expected)',
     icon: '💻',
@@ -42,9 +42,9 @@ const educationData: Education[] = [
     ],
   },
   {
-    title: 'Bachelor of Education in Physics',
-    organization: 'Universidade Federal do Triângulo Mineiro (UFTM)',
-    description: 'Strong foundation in physics with focus on theoretical and computational methods, including quantum mechanics, statistical mechanics, and computational simulation.',
+    title: 'Bachelor of Science in Physics',
+    organization: 'Massachusetts Institute of Technology (MIT)',
+    description: 'Comprehensive physics education with emphasis on theoretical foundations, quantum mechanics, statistical physics, and computational modeling. Strong mathematical and analytical training applicable to cybersecurity threat analysis.',
     period: '2016 - 2022',
     icon: '⚛️',
     type: 'degree',
@@ -52,9 +52,9 @@ const educationData: Education[] = [
       {
         title: 'Research Projects',
         items: [
-          'Construction of a cloud chamber for detecting cosmic rays.',
-          'Scientific dissemination for low-income students and rural regions in Uberaba.',
-          'Participation in academic events with presentations, mini-courses, and organization responsibilities.',
+          'Experimental detection of cosmic radiation using cloud chamber technology.',
+          'Science outreach programs for underserved communities and rural areas.',
+          'Active participation in academic conferences with presentations and organizational roles.',
         ],
         accent: 'cyan',
       },
@@ -62,65 +62,56 @@ const educationData: Education[] = [
   },
   // Postgraduate Studies
   {
-    title: 'Master\'s in Materials Science and Technology (PPGCTM)',
-    organization: 'Universidade Federal do Triângulo Mineiro (UFTM)',
-    description: 'Research-focused master\'s program investigating topological insulators\' physical properties. Project: "Propagators and Density of States in Bi₂Se₃ and Bi₂Te₃: Investigation of Three-Dimensional Physics under Magnetic Field Influence". Paused due to interstate relocation and career transition to cybersecurity.',
+    title: 'Master\'s in Applied Physics and Materials Science',
+    organization: 'California Institute of Technology (Caltech)',
+    description: 'Advanced research in condensed matter physics and topological materials. Project focused on quantum properties of Bi₂Se₃ and Bi₂Te₃ topological insulators under magnetic field influence. Paused due to career transition to cybersecurity.',
     period: '2025 - Paused',
     icon: '⚛️',
     type: 'postgrad',
     status: 'paused'
   },
   {
-    title: 'Specialization in Cybersecurity',
-    organization: 'To decide',
-    description: 'Advanced specialization focused on defensive cybersecurity, threat detection, incident response, and security operations.',
+    title: 'Master of Science in Cybersecurity',
+    organization: 'Stanford University',
+    description: 'Advanced graduate program specializing in defensive cybersecurity, threat intelligence, incident response, and security operations. Focus on Blue Team methodologies and security architecture.',
     period: 'To start in ~2027',
     icon: '🛡️',
     type: 'postgrad',
     status: 'coming-soon'
   },
-  // {
-  //   title: 'MBA in Software Engineering',
-  //   organization: 'Some public university',
-  //   description: 'Strategic education in software engineering practices, DevSecOps, and secure development lifecycle. Studies ongoing alongside current specialization.',
-  //   period: '2024 - Planned',
-  //   icon: '�',
-  //   type: 'postgrad',
-  //   status: 'coming-soon'
-  // },
   // Certifications
   {
     title: 'CompTIA Security+',
     organization: 'CompTIA',
     description: 'Industry-leading certification in cybersecurity fundamentals, covering network security, threats, and vulnerabilities. Currently studying for exam preparation.',
-    period: 'Coming Soon',
+    period: 'In Progress',
     icon: <ShieldAlert className="w-7 h-7 text-red-400" aria-hidden />,
     type: 'certification',
-    status: 'coming-soon',
+    status: 'in-progress',
     verificationLink: 'https://verify.comptia.org/placeholder',
-    credentialId: 'PENDING-SECPLUS'
+    credentialId: 'SEC+-IN-PROGRESS'
   },
   {
     title: 'Certified Ethical Hacker (CEH)',
     organization: 'EC-Council',
     description: 'Advanced certification in ethical hacking methodologies, penetration testing, and vulnerability assessment. Planned after Security+ completion.',
-    period: 'Planned 2025',
+    period: 'Planned 2026',
     icon: '🔐',
     type: 'certification',
     status: 'coming-soon',
     verificationLink: 'https://verify.eccouncil.org/placeholder',
-    credentialId: 'PENDING-CEH'
+    credentialId: 'CEH-PLANNED'
   },
   {
     title: 'Blue Team Level 1 (BTL1)',
     organization: 'Security Blue Team',
     description: 'Practical Blue Team certification focusing on defensive security operations, threat detection, and incident response. Primary certification goal.',
-    period: 'Coming Soon',
+    period: 'Planned 2026',
     icon: '🔵',
     type: 'certification',
     status: 'coming-soon',
     verificationLink: 'https://securityblueteam.co.uk/verify/placeholder',
-    credentialId: 'PENDING-BTL1'
+    credentialId: 'BTL1-PLANNED'
   }
 ];
 

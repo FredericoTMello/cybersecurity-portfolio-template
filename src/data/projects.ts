@@ -15,53 +15,53 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Beuni Birthday Management Platform',
+    title: 'SIEM Analytics Dashboard',
     description:
-      'Enterprise-grade corporate birthday management platform with automated gift sending, real-time notifications, and comprehensive analytics dashboard. Built with DevSecOps principles: 92% test coverage, zero critical vulnerabilities, JWT authentication, CSRF protection, and A+ security rating. Active development with 500+ managed files.',
-    image: '/images/projects/beuni.png',
-    status: 'Tech Challenge',
+      'Enterprise security information and event management (SIEM) analytics dashboard with real-time threat detection, automated incident response workflows, and comprehensive security metrics visualization. Built with security-first principles including role-based access control, encrypted data transmission, and audit logging.',
+  image: '/images/site/blog-cover1.webp',
+    status: 'Example Project',
     statusColor: 'bg-cyber-green',
-    tags: ['Next.js 14', 'NestJS 10', 'TypeScript', 'PostgreSQL 15', 'Redis', 'DevSecOps', 'Vitest', 'Jest'],
+    tags: ['Python', 'Elastic Stack', 'Splunk', 'Security Analytics', 'Threat Detection', 'DevSecOps'],
     links: {
-      github: 'https://github.com/zer0spin/beuni-desafio',
-      demo: 'https://beuni-frontend-one.vercel.app',
+      github: 'https://github.com/yourusername/siem-dashboard',
+      demo: 'https://demo.example.com',
     },
   },
   {
-    title: 'Cybersec-BR',
+    title: 'Automated Threat Intelligence Platform',
     description:
-      'Collaborative open-source knowledge base for Brazilian cybersecurity community. Features comprehensive beginner guides, structured career paths (Red Team & Blue Team), certification guidance, and job market analysis across different experience levels. MIT licensed with growing community of contributors focused on knowledge sharing and professional networking.',
-    image: '/images/projects/cybersecbr.png',
-    status: 'Brazil 🇧🇷',
+      'Open-source threat intelligence aggregation platform that collects, correlates, and analyzes indicators of compromise (IOCs) from multiple feeds. Includes MITRE ATT&CK mapping, automated threat scoring, and integration with popular security tools. Designed for SOC teams to enhance threat hunting capabilities.',
+  image: '/images/site/blog-cover2.webp',
+    status: 'Open Source',
     statusColor: 'bg-cyber-cyan',
-    tags: ['Open Source', 'Community', 'Education', 'Career Guidance', 'Markdown', 'GitHub'],
+    tags: ['Threat Intelligence', 'MITRE ATT&CK', 'Python', 'API Integration', 'SOC Tools', 'Security Automation'],
     links: {
-      github: 'https://github.com/zer0spin/cybersec-br',
+      github: 'https://github.com/yourusername/threat-intel-platform',
     },
   },
   {
-    title: 'InfoSec Digest',
+    title: 'Security Orchestration Automation',
     description:
-      'Automated cybersecurity news aggregator with Security by Design architecture. Uses Python 3.11, GitHub Actions for hourly updates, and GitOps principles. Features include XSS prevention via client-side rendering, resilient RSS feed processing with error handling, content classification via keywords.json, and lightweight Pico.css interface. Zero infrastructure costs with 574+ commits.',
-    image: '/images/projects/infosec-digest.png',
-    status: 'In Use',
+      'Security orchestration, automation and response (SOAR) playbooks for common incident response scenarios. Automates repetitive security tasks including phishing analysis, malware triage, and vulnerability management. Integrates with leading SIEM, EDR, and ticketing systems for streamlined security operations.',
+  image: '/images/site/blog-cover1.webp',
+    status: 'Active Development',
     statusColor: 'bg-cyber-green',
-    tags: ['Python 3.11', 'GitHub Actions', 'GitOps', 'Pico.css', 'Security by Design', 'Automation'],
+    tags: ['SOAR', 'Security Automation', 'Incident Response', 'Python', 'API', 'Integration'],
     links: {
-      github: 'https://github.com/zer0spin/infosec-digest',
-      demo: 'https://infosec-digest.vercel.app/',
+      github: 'https://github.com/yourusername/soar-playbooks',
+      demo: 'https://demo.example.com',
     },
   },
   {
-    title: 'zer0spin Portfolio',
+    title: 'Blue Team Security Portfolio',
     description:
-      'Professional Blue Team cybersecurity portfolio with integrated blog system using MDX, modern Next.js 14 + TypeScript architecture, and responsive cyberpunk design. Features technical articles on Threat Hunting, SIEM, Incident Response, and Security Operations with optimized static rendering.',
+      'Professional cybersecurity portfolio template with integrated blog system using MDX, modern Next.js architecture, and responsive design. Features technical articles on threat hunting, SIEM operations, incident response, and security operations with optimized static rendering and security-hardened configuration.',
     image: 'current-site',
     status: 'Production',
     statusColor: 'bg-cyber-green',
-    tags: ['Next.js 14', 'MDX Blog', 'TypeScript', 'Production', 'SSG', 'Responsive'],
+    tags: ['Next.js', 'MDX Blog', 'TypeScript', 'Security', 'SSG', 'Responsive'],
     links: {
-      github: 'https://github.com/zer0spin/zer0spin',
+      github: 'https://github.com/yourusername/portfolio',
     },
   },
 ];
