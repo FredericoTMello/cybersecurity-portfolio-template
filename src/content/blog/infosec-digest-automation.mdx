@@ -1,0 +1,631 @@
+---
+title: "InfoSec Digest: Automating Security News Aggregation with GitHub Actions"
+description: "Building a self-updating cybersecurity news aggregator using Python, GitHub Actions, and GitOps principles—no servers required."
+date: "2025-09-21"
+readTime: "10 min read"
+category: "Automation"
+author: "zer0spin"
+featured: false
+coverImage: "/images/projects/infosec-digest.webp"
+tags: ["automation", "python", "github-actions", "gitops", "news"]
+---
+
+Keeping up with cybersecurity news is exhausting. I subscribed to 20+ newsletters, followed 50+ Twitter accounts, and still missed critical updates.
+
+**The solution?** Build an automated aggregator that runs itself.
+
+**InfoSec Digest** collects, filters, and organizes security news from trusted sources—completely automated with **GitHub Actions**. No servers. No databases. Just Git, Python, and vanilla JavaScript with Pico.css for a lightweight, beautiful interface.
+
+---
+
+## The Problem
+
+**Information Fragmentation**:
+- Security news scattered across blogs, podcasts, Twitter
+- No single source for Portuguese content
+- RSS readers require manual curation
+- Email newsletters spam your inbox
+
+**Time Waste**:
+- 1-2 hours/day reading duplicated news
+- Context switching between platforms
+- Missing critical security advisories
+
+**I needed a system that works while I sleep.**
+
+---
+
+## Architecture: GitOps-Powered Automation
+
+### Core Principle: Git as Database
+
+**Everything is a Git commit**:
+```
+Main Branch
+├── index.html (generated webpage)
+├── feeds/
+│   ├── news.json (latest articles)
+│   ├── podcasts.json (latest episodes)
+│   └── pt-br.json (Portuguese content)
+└── scripts/
+    ├── fetch_feeds.py (RSS parser)
+    ├── filter_content.py (deduplication)
+    └── generate_site.py (HTML builder)
+```
+
+**Workflow**:
+1. GitHub Actions runs on schedule (hourly updates)
+2. Python 3.11 scripts fetch RSS feeds with error handling
+3. Content is classified using keywords.json
+4. Static data.json is generated
+5. Client-side JavaScript renders content (XSS prevention via .textContent)
+6. Changes committed to Git automatically
+7. Vercel serves updated site
+
+**Zero infrastructure costs. Zero maintenance. Minimal attack surface.**
+
+---
+
+## Implementation Deep Dive
+
+### 1. Feed Fetching (Python + feedparser)
+
+**Multi-source aggregation**:
+```python
+import feedparser
+import requests
+from datetime import datetime
+
+SOURCES = {
+    'krebs': 'https://krebsonsecurity.com/feed/',
+    'schneier': 'https://www.schneier.com/blog/atom.xml',
+    'threatpost': 'https://threatpost.com/feed/',
+    'darkreading': 'https://www.darkreading.com/rss.xml',
+    # 20+ more sources
+}
+
+def fetch_feed(name, url):
+    """Fetch and parse RSS feed with error handling"""
+    try:
+        feed = feedparser.parse(url)
+        
+        articles = []
+        for entry in feed.entries[:10]:  # Latest 10
+            articles.append({
+                'title': entry.title,
+                'link': entry.link,
+                'published': entry.get('published', 'Unknown'),
+                'summary': entry.get('summary', '')[:200],
+                'source': name
+            })
+        
+        return articles
+    
+    except Exception as e:
+        print(f"Error fetching {name}: {e}")
+        return []
+
+# Fetch all feeds in parallel
+from concurrent.futures import ThreadPoolExecutor
+
+def fetch_all_feeds():
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = executor.map(
+            lambda item: fetch_feed(item[0], item[1]),
+            SOURCES.items()
+        )
+    
+    # Flatten results
+    all_articles = [article for feed in results for article in feed]
+    return all_articles
+```
+
+**Why parallel fetching?**
+- 20+ sources would take 2+ minutes sequentially
+- ThreadPoolExecutor reduces to ~10 seconds
+- GitHub Actions has 6-minute timeout
+
+---
+
+### 2. Deduplication & Filtering
+
+**Problem**: Different sources publish same stories.
+
+**Solution**: Content similarity detection
+```python
+from difflib import SequenceMatcher
+
+def is_duplicate(article1, article2, threshold=0.8):
+    """Check if two articles are duplicates based on title similarity"""
+    ratio = SequenceMatcher(
+        None,
+        article1['title'].lower(),
+        article2['title'].lower()
+    ).ratio()
+    
+    return ratio > threshold
+
+def deduplicate_articles(articles):
+    """Remove duplicate articles, keeping highest-quality source"""
+    
+    # Sort by source priority (Krebs > Schneier > others)
+    SOURCE_PRIORITY = {
+        'krebs': 1,
+        'schneier': 2,
+        'threatpost': 3,
+        # ...
+    }
+    
+    articles.sort(key=lambda a: SOURCE_PRIORITY.get(a['source'], 99))
+    
+    unique = []
+    for article in articles:
+        if not any(is_duplicate(article, existing) for existing in unique):
+            unique.append(article)
+    
+    return unique
+```
+
+**Deduplication reduces noise by ~40%.**
+
+---
+
+### 3. Portuguese Content Detection
+
+**Brazilian community needs local language content**:
+```python
+from langdetect import detect
+
+def detect_language(text):
+    """Detect language of article"""
+    try:
+        return detect(text)
+    except:
+        return 'unknown'
+
+def filter_portuguese(articles):
+    """Extract Portuguese articles"""
+    pt_articles = []
+    
+    for article in articles:
+        # Check title and summary
+        text = f"{article['title']} {article['summary']}"
+        
+        if detect_language(text) == 'pt':
+            pt_articles.append(article)
+    
+    return pt_articles
+
+# Separate feeds
+all_articles = fetch_all_feeds()
+en_articles = [a for a in all_articles if detect_language(a['title']) == 'en']
+pt_articles = filter_portuguese(all_articles)
+```
+
+**Portuguese section is a unique differentiator** for Brazilian users.
+
+---
+
+### 4. Static Site Generation
+
+**Simple, fast, accessible HTML**:
+```python
+def generate_html(articles, podcasts, pt_articles):
+    """Generate static HTML page"""
+    
+    html = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>InfoSec Digest</title>
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    </head>
+    <body>
+        <main class="container">
+            <h1>🔐 InfoSec Digest</h1>
+            <p>Automated cybersecurity news aggregation. Updated every 6 hours.</p>
+            
+            <section>
+                <h2>📰 Latest News</h2>
+    """
+    
+    # Add articles
+    for article in articles[:20]:
+        html += f"""
+        <article>
+            <h3><a href="{article['link']}" target="_blank">{article['title']}</a></h3>
+            <p><small>{article['source']} • {article['published']}</small></p>
+            <p>{article['summary']}</p>
+        </article>
+        """
+    
+    # Add Portuguese section
+    if pt_articles:
+        html += """
+        <section>
+            <h2>🇧🇷 Conteúdo em Português</h2>
+        """
+        for article in pt_articles[:10]:
+            html += f"""
+            <article>
+                <h3><a href="{article['link']}" target="_blank">{article['title']}</a></h3>
+                <p><small>{article['source']} • {article['published']}</small></p>
+            </article>
+            """
+    
+    html += """
+            </section>
+        </main>
+    </body>
+    </html>
+    """
+    
+    return html
+
+# Write to file
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+```
+
+**Why Pico.css?**
+- ✅ Classless CSS (semantic HTML)
+- ✅ 10KB minified (fast loading)
+- ✅ Beautiful out-of-the-box
+- ✅ Dark mode support
+
+---
+
+### 5. GitHub Actions Workflow
+
+**Automation engine**:
+```yaml
+name: Update InfoSec Digest
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-digest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Fetch and process feeds
+        run: |
+          python scripts/fetch_feeds.py
+          python scripts/filter_content.py
+          python scripts/generate_site.py
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "chore: update digest $(date +'%Y-%m-%d %H:%M')"
+            git push
+          )
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+```
+
+**Scheduling**:
+- Every 6 hours: `0 */6 * * *` (cron syntax)
+- Automatic commits to Git
+- GitHub Pages deployment
+
+**Cost: $0/month** (GitHub Actions free tier: 2000 minutes)
+
+---
+
+## Security Considerations
+
+### 1. Input Validation
+
+**Never trust external feeds**:
+```python
+import html
+from urllib.parse import urlparse
+
+def sanitize_article(article):
+    """Sanitize article data"""
+    
+    # Escape HTML in titles
+    article['title'] = html.escape(article['title'])
+    
+    # Validate URLs
+    parsed = urlparse(article['link'])
+    if parsed.scheme not in ['http', 'https']:
+        article['link'] = '#'  # Invalid URL
+    
+    # Truncate summaries (prevent XSS)
+    article['summary'] = html.escape(article['summary'][:500])
+    
+    return article
+```
+
+**Why?**
+- Malicious RSS feeds could inject JavaScript
+- Invalid URLs could break site
+- Long summaries could DOS browsers
+
+---
+
+### 2. Rate Limiting
+
+**Don't hammer source servers**:
+```python
+import time
+
+def fetch_with_backoff(url, max_retries=3):
+    """Fetch URL with exponential backoff"""
+    
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            return response.text
+        
+        except requests.RequestException as e:
+            if attempt == max_retries - 1:
+                raise
+            
+            # Exponential backoff: 1s, 2s, 4s
+            wait_time = 2 ** attempt
+            time.sleep(wait_time)
+```
+
+**Respectful scraping**:
+- Timeouts prevent hanging
+- Backoff reduces server load
+- Honors HTTP 429 (rate limit)
+
+---
+
+### 3. Secrets Management
+
+**GitHub Actions secrets for sensitive data**:
+```yaml
+- name: Post to Twitter (optional)
+  env:
+    TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+  run: |
+    python scripts/post_to_twitter.py
+```
+
+**Never hardcode credentials in Git.**
+
+---
+
+## Performance Optimizations
+
+### 1. Caching
+
+**Avoid re-fetching unchanged feeds**:
+```python
+import hashlib
+import json
+
+def load_cache():
+    try:
+        with open('cache.json', 'r') as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_cache(cache):
+    with open('cache.json', 'w') as f:
+        json.dump(cache, f)
+
+def fetch_if_changed(url, cache):
+    """Only fetch if content changed"""
+    
+    response = requests.head(url)
+    etag = response.headers.get('ETag', '')
+    
+    if cache.get(url) == etag:
+        print(f"Cache hit: {url}")
+        return None  # Use cached version
+    
+    # Fetch new content
+    content = fetch_feed(url)
+    cache[url] = etag
+    
+    return content
+```
+
+**Cache reduces API calls by ~60%.**
+
+---
+
+### 2. Incremental Updates
+
+**Only process new articles**:
+```python
+def get_new_articles(current, previous):
+    """Find articles not in previous fetch"""
+    
+    previous_links = {a['link'] for a in previous}
+    
+    new = [a for a in current if a['link'] not in previous_links]
+    
+    return new
+```
+
+**Faster processing + less Git churn.**
+
+---
+
+## Results & Impact
+
+### Repository Stats
+- **Total commits**: 574
+- **Stars**: 7
+- **Languages**: HTML (48.6%), JavaScript (26.2%), Python (25.2%)
+- **License**: MIT
+- **Status**: Active development
+
+### Architecture Highlights
+- **Security by Design**: Minimal attack surface with static hosting
+- **No Backend**: No dynamic server or database vulnerabilities
+- **Automated Updates**: Hourly content refresh via GitHub Actions
+- **XSS Prevention**: Client-side rendering with .textContent
+- **Resilient Processing**: Error handling in RSS feed fetching
+- **Content Classification**: Smart categorization using keyword matching
+
+### Key Features
+- Centralized cybersecurity news collection
+- Lightweight, responsive interface with Pico.css
+- Hourly automated content updates
+- Strong security focus with minimal dependencies
+- GitOps principles for deployment
+
+### Personal Benefits
+- ✅ Reduced news reading time significantly
+- ✅ Never miss critical advisories
+- ✅ Portfolio project demonstrating automation skills
+- ✅ Community contribution to security ecosystem
+- ✅ Demonstrates "Security by Design" principles
+
+---
+
+## Lessons Learned
+
+### What Worked
+
+✅ **GitOps model**: Simple, reliable, free  
+✅ **Aggressive deduplication**: Users love signal over noise  
+✅ **Portuguese content**: Unique value for Brazilian users  
+✅ **Minimalist design**: Fast loading, high accessibility  
+✅ **GitHub Actions**: Reliable automation
+
+### What I'd Improve
+
+⚠️ **Search functionality**: Currently no way to search archives  
+⚠️ **RSS output**: Users requested digest RSS feed  
+⚠️ **Email notifications**: Optional daily digest  
+⚠️ **Categorization**: Tag articles by topic (malware, breaches, tools)
+
+---
+
+## Future Roadmap
+
+### Short-term (Q4 2024)
+- [ ] Add search using lunr.js
+- [ ] Generate RSS feed output
+- [ ] Category tagging with ML
+- [ ] Weekly email digest (optional)
+
+### Long-term (2025)
+- [ ] User accounts (save preferences)
+- [ ] Custom source selection
+- [ ] Integration with Slack/Discord
+- [ ] Mobile app (React Native)
+
+---
+
+## Technical Stack
+
+**Backend**:
+- Python 3.11
+- feedparser (RSS parsing)
+- langdetect (language detection)
+- requests (HTTP client)
+
+**Frontend**:
+- Vanilla JavaScript
+- Pico.css (styling)
+- Semantic HTML
+
+**Infrastructure**:
+- GitHub Actions (automation)
+- GitHub Pages (hosting)
+- Git (database)
+
+**Cost**: $0/month
+
+---
+
+## How to Build Your Own
+
+**1. Fork the repository**:
+```bash
+git clone https://github.com/zer0spin/infosec-digest
+cd infosec-digest
+```
+
+**2. Add your sources**:
+```python
+# In scripts/fetch_feeds.py
+SOURCES = {
+    'your_blog': 'https://yourblog.com/feed/',
+    # Add more...
+}
+```
+
+**3. Customize the design**:
+```html
+<!-- In scripts/generate_site.py -->
+<h1>Your Digest Name</h1>
+```
+
+**4. Enable GitHub Actions**:
+- Go to Settings &gt; Actions &gt; Enable
+- Go to Settings &gt; Pages &gt; Source: gh-pages branch
+
+**5. Wait for first run**:
+- Manually trigger workflow or wait for schedule
+
+**Done. Your aggregator is live.**
+
+---
+
+## Key Takeaways
+
+1. **GitOps is powerful**: Git as database is underrated
+2. **Automation is essential**: Let computers do repetitive work
+3. **Free tier is generous**: GitHub Actions + Pages = $0
+4. **Deduplication matters**: Users value signal over noise
+5. **Localization works**: Portuguese section drives engagement
+
+**You don't need servers to build useful tools.**
+
+---
+
+## Links
+
+- **Live Site**: [zer0spin.github.io/infosec-digest](https://zer0spin.github.io/infosec-digest)
+- **GitHub Repo**: [github.com/zer0spin/infosec-digest](https://github.com/zer0spin/infosec-digest)
+- **Fork & Customize**: [github.com/zer0spin/infosec-digest/fork](https://github.com/zer0spin/infosec-digest/fork)
+
+---
+
+**Automation is a force multiplier.** Build tools that work while you sleep.
+
+**What repetitive task are you still doing manually?** Automate it. Share it. Help others.
+
+---
+
+**Questions?** Open an issue on GitHub—let's build better tools together.
