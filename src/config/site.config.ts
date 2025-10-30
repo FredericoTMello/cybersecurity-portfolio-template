@@ -1,107 +1,86 @@
-/**
- * Site Configuration
- *
- * Central configuration for site-wide metadata, branding, and URLs.
- * ⚠️ IMPORTANT: Update these values with your own information!
- *
- * This is a template - replace all placeholder values with your actual details.
- */
-
 export const siteConfig = {
-  /**
-   * Site identity and branding
-   * Replace with your name and professional details
-   */
-  name: 'Your Name - Cybersecurity Professional',
-  codename: 'your-handle', // Your preferred username/handle
+  name: 'Frederico Mello - Consultor Financeiro W1',
+  codename: 'frederico-w1',
   author: {
-    name: 'Your Full Name',
-    codename: 'your-handle',
-    jobTitle: 'Cybersecurity Specialist | Blue Team', // Your professional title
-    tagline: 'Your professional tagline or motto',
-    description: 'Your professional bio. Describe your background, expertise, and what makes you unique in the cybersecurity field.',
-    organization: 'Your Organization or Independent',
+    name: 'Frederico Mello',
+    codename: 'frederico-w1',
+    jobTitle: 'Consultor Financeiro | Gestão Patrimonial',
+    tagline: 'Da Estabilidade à Riqueza Acelerada: Seu Plano Mestre para a Independência Financeira.',
+    description:
+      'Transformo incertezas em clareza financeira. Como Consultor W1, conecto você à maior consultoria do Brasil para construir patrimônio, proteção e legado. Com plano 360º, tecnologia de Wealth Management e apoio de especialistas, garanto orientação de confiança para seu crescimento e tranquilidade.',
+    organization: 'W1 Consultoria Financeira & Wealth Management',
   },
 
-  /**
-   * Site URLs and domains
-   * Update with your actual domain
-   */
   urls: {
-    base: 'https://yourdomain.com',
-    canonical: 'https://yourdomain.com',
+    base: 'https://frederico-w1.com.br',
+    canonical: 'https://frederico-w1.com.br',
   },
 
-  /**
-   * Default SEO metadata
-   * Customize for better search engine optimization
-   */
   seo: {
-    title: 'Your Name - Cybersecurity Professional Portfolio',
-    description: 'Professional portfolio showcasing cybersecurity projects, blog posts, and expertise. Specializing in [your specializations].',
+    title: 'Frederico Mello - Consultor Financeiro W1 | Planejamento Patrimonial',
+    description:
+      'Consultoria financeira personalizada com a força da W1, líder nacional. Planejamento 360°, investimentos, proteção patrimonial e legado. Atendimento presencial em Ribeirão Preto e online para todo Brasil.',
     keywords: [
-      'cybersecurity',
-      'blue team',
-      'defensive security',
-      'security analyst',
-      'SOC analyst',
-      'SIEM',
-      'incident response',
-      'threat hunting',
-      'security operations',
-      'your name', // Replace with your actual name
-      'your handle', // Replace with your handle
+      'consultor financeiro',
+      'planejamento financeiro',
+      'consultoria financeira',
+      'gestão de patrimônio',
+      'W1 Consultoria',
+      'consultor W1',
+      'investimentos',
+      'consultoria imobiliária',
+      'educação financeira',
+      'Ribeirão Preto',
+      'Finanças pessoais',
+      'independência financeira',
+      'Frederico Mello',
+      'consultoria patrimonial',
     ],
   },
 
-  /**
-   * Default OG image
-   * Path to your social media preview image (recommended: 1200x630px)
-   */
-  defaultImage: '/images/site/og-default.png',
+  defaultImage: '/images/site/og-frederico-w1.png',
 
-  /**
-   * Supported languages
-   * Add or remove languages as needed
-   */
   languages: {
-    default: 'en-US',
-    supported: ['en-US'], // Add 'pt-BR', 'es-ES', etc. as needed
+    default: 'pt-BR',
+    supported: ['pt-BR'],
   },
 
-  /**
-   * Theme configuration
-   */
   theme: {
-    defaultMode: 'dark',
-    color: '#0a1929', // Your brand color in hex
+    defaultMode: 'light',
+    color: '#0066cc',
   },
 
-  /**
-   * Educational background
-   * Update with your actual educational institutions
-   */
   education: [
     {
-      name: 'Your University Name',
+      name: 'W1 Academy - Wealth Management',
       type: 'EducationalOrganization',
     },
-    // Add more education entries as needed
+    {
+      name: 'Correios - Gestão Comercial',
+      type: 'Organization',
+    },
+    {
+      name: 'Certificação ANCORD',
+      type: 'Certification',
+    },
   ],
 
-  /**
-   * Areas of expertise
-   * List your key skills and specializations
-   */
+  // ESTES DOIS PRIMEIROS ITENS SÃO OS QUE VÃO APARECER NO BADGE
   expertise: [
-    'Cybersecurity',
-    'Blue Team Operations',
-    'SIEM',
-    'Incident Response',
-    'Threat Hunting',
-    'Security Operations Center',
-    'Defensive Security',
-    // Add your specific expertise areas
+    'Consultor Financeiro',
+    'Gestão Patrimonial',
+    'Investimentos Personalizados',
+    'Consultoria Imobiliária',
+    'Educação Financeira',
+    'Wealth Management',
+    'Proteção Patrimonial',
+    'Renda Fixa e Variável',
+    'Previdência Privada',
+    'Otimização Tributária',
+    'Estratégias Legado Familiar',
+    'Finanças para Autônomos e PJ',
+    'Gestão de Alto Patrimônio',
+    'Mentoria em Consultoria',
   ],
 } as const;
 

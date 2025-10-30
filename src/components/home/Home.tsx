@@ -20,12 +20,12 @@ interface HomeSectionProps {
 
 function HomeSection({ translations }: HomeSectionProps) {
   const defaultTranslations: HomeTranslations = {
-    badge: 'Blue Team | Defensive Security',
+    badge: 'Consultor Financeiro | Gestão Patrimonial',
     title: siteConfig.author.name,
     codename: siteConfig.codename,
     tagline: siteConfig.author.tagline,
     description: siteConfig.author.description,
-    cta: 'Explore Projects',
+    cta: 'Projetos',
   };
 
   const t: HomeTranslations = translations ?? defaultTranslations;
@@ -81,7 +81,7 @@ function HomeSection({ translations }: HomeSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-4xl md:text-5xl font-bold mb-8"
           >
             <span className="text-white">{t.title} </span>
             <span className="text-cyber-cyan font-mono">({t.codename})</span>

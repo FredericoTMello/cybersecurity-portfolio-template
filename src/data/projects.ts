@@ -15,53 +15,51 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'SIEM Analytics Dashboard',
+    title: 'Planejamento Financeiro Pessoal',
     description:
-      'Enterprise security information and event management (SIEM) analytics dashboard with real-time threat detection, automated incident response workflows, and comprehensive security metrics visualization. Built with security-first principles including role-based access control, encrypted data transmission, and audit logging.',
-  image: '/images/site/blog-cover1.webp',
-    status: 'Example Project',
+      'Consultoria para organização das finanças familiares e pessoais: diagnóstico financeiro, construção de orçamento, definição de metas e acompanhamento mensal. Foco em independência financeira e bem-estar.',
+    image: '/images/site/5-dicas.jpg',
+    status: 'Serviço Premium',
     statusColor: 'bg-cyber-green',
-    tags: ['Python', 'Elastic Stack', 'Splunk', 'Security Analytics', 'Threat Detection', 'DevSecOps'],
+    tags: ['Orçamento', 'Metas', 'Consultoria', 'Planejamento', 'Educação Financeira'],
     links: {
-      github: 'https://github.com/yourusername/siem-dashboard',
-      demo: 'https://demo.example.com',
+      demo: 'https://calendly.com/seuusuario/consultoria',
     },
   },
   {
-    title: 'Automated Threat Intelligence Platform',
+    title: 'Consultoria Empresarial',
     description:
-      'Open-source threat intelligence aggregation platform that collects, correlates, and analyzes indicators of compromise (IOCs) from multiple feeds. Includes MITRE ATT&CK mapping, automated threat scoring, and integration with popular security tools. Designed for SOC teams to enhance threat hunting capabilities.',
-  image: '/images/site/blog-cover2.webp',
-    status: 'Open Source',
+      'Solução personalizada para controle de fluxo de caixa, redução de custos e maximização de resultados. Atendimento dedicado a micro e pequenas empresas.',
+    image: '/images/site/pessoas.jpg',
+    status: 'Agende Agora',
     statusColor: 'bg-cyber-cyan',
-    tags: ['Threat Intelligence', 'MITRE ATT&CK', 'Python', 'API Integration', 'SOC Tools', 'Security Automation'],
+    tags: ['Empresas', 'Gestão', 'Controle', 'Resultado', 'Financeiro'],
     links: {
-      github: 'https://github.com/yourusername/threat-intel-platform',
+      demo: 'https://wa.me/55999999999?text=Consultoria+Empresarial',
     },
   },
   {
-    title: 'Security Orchestration Automation',
+    title: 'Análise de Investimentos',
     description:
-      'Security orchestration, automation and response (SOAR) playbooks for common incident response scenarios. Automates repetitive security tasks including phishing analysis, malware triage, and vulnerability management. Integrates with leading SIEM, EDR, and ticketing systems for streamlined security operations.',
-  image: '/images/site/blog-cover1.webp',
-    status: 'Active Development',
+      'Avaliação, diversificação e recomendações personalizadas para portfólio financeiro. Ideal para quem busca entender riscos e oportunidades em renda fixa, variável e fundos.',
+    image: '/images/site/investimentos.webp',
+    status: 'Especializado',
     statusColor: 'bg-cyber-green',
-    tags: ['SOAR', 'Security Automation', 'Incident Response', 'Python', 'API', 'Integration'],
+    tags: ['Investimentos', 'Renda Fixa', 'Renda Variável', 'Fundos', 'Carteira'],
     links: {
-      github: 'https://github.com/yourusername/soar-playbooks',
-      demo: 'https://demo.example.com',
+      demo: 'https://calendly.com/seuusuario/investimentos',
     },
   },
   {
-    title: 'Blue Team Security Portfolio',
+    title: 'Diagnóstico Financeiro Empresarial',
     description:
-      'Professional cybersecurity portfolio template with integrated blog system using MDX, modern Next.js architecture, and responsive design. Features technical articles on threat hunting, SIEM operations, incident response, and security operations with optimized static rendering and security-hardened configuration.',
-    image: 'current-site',
-    status: 'Production',
+      'Diagnóstico completo das finanças da empresa, com relatórios, gráficos e indicadores. Serve como base para decisões estratégicas e desenvolvimento do negócio.',
+    image: '/images/site/diagnostico.webp',
+    status: 'Produção',
     statusColor: 'bg-cyber-green',
-    tags: ['Next.js', 'MDX Blog', 'TypeScript', 'Security', 'SSG', 'Responsive'],
+    tags: ['Diagnóstico', 'Indicação', 'Consultoria Empresarial', 'Gestão', 'Relatório'],
     links: {
-      github: 'https://github.com/yourusername/portfolio',
+      demo: 'https://frederico-w1.com',
     },
   },
 ];

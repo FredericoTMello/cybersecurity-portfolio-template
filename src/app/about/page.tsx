@@ -48,7 +48,7 @@ export default function AboutPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyber-teal-dark/50 border border-cyber-cyan/30 rounded-full mb-4">
                   <div className="w-2 h-2 bg-cyber-green rounded-full animate-pulse" />
                   <span className="text-sm text-cyber-gray-light font-mono">
-                    Blue Team | Defensive Security
+                    Consultor Financeiro | Gestão Patrimonial
                   </span>
                 </div>
 

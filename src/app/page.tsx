@@ -24,12 +24,12 @@ export const metadata: Metadata = generateSEO({
 export default function Home() {
   // English translations
   const homeTranslations = {
-    badge: 'Blue Team | Defensive Security',
+    badge: 'Consultor Financeiro | Gestão Patrimonial',
     title: siteConfig.author.name,
     codename: siteConfig.codename,
     tagline: siteConfig.author.tagline,
     description: siteConfig.author.description,
-    cta: 'Explore Projects',
+    cta: 'Projetos',
   };
 
   return (

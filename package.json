@@ -1,7 +1,13 @@
 {
-  "name": "cybersecurity-portfolio-template",
+  "name": "w1-consultoria-frederico",
   "version": "1.0.0",
-  "description": "Blue Team Cybersecurity Portfolio Template - Professional Security Portfolio",
+  "description": "Landing page profissional para consultoria financeira W1 - Frederico Mello",
+  "author": "Frederico Mello <fredericotmello@gmail.com>",
+  "homepage": "https://frederico-w1.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seu-usuario/w1-consultoria-frederico.git"
+  },
   "private": true,
   "type": "module",
   "scripts": {
