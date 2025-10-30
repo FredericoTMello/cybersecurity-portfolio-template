@@ -24,14 +24,14 @@ export function useHeaderNavigation() {
   const getNavLinks = (): NavLink[] => {
     if (isHome) {
       return [
-        { href: '#home', label: 'Home', isAnchor: true },
-        { href: '/about', label: 'About', isAnchor: false },
-        { href: '#projects-preview', label: 'Projects', isAnchor: true },
+        { href: '#home', label: 'Início', isAnchor: true },
+        { href: '/about', label: 'Sobre', isAnchor: false },
+        { href: '#projects-preview', label: 'Projetos', isAnchor: true },
         { href: '#homelabs-preview', label: 'Home Labs', isAnchor: true },
-        { href: '#formation', label: 'Formation', isAnchor: true },
-        { href: '#experience', label: 'Experience', isAnchor: true },
+        { href: '#formation', label: 'Formação', isAnchor: true },
+        { href: '#experience', label: 'Experiência', isAnchor: true },
         { href: '/blog', label: 'Blog', isAnchor: false },
-        { href: '#contact', label: 'Contact', isAnchor: true },
+        { href: '#contact', label: 'Contato', isAnchor: true },
       ];
     }
 

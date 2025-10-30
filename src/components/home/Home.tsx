@@ -145,7 +145,7 @@ function HomeSection({ translations }: HomeSectionProps) {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-6xl">🛡️</span>
+              <span className="text-6xl">📈</span>
             </div>
           </m.div>
 
@@ -175,7 +175,7 @@ function HomeSection({ translations }: HomeSectionProps) {
                   delay: angle / 90,
                 }}
               >
-                ⚠️
+                💲
               </m.div>
             ))}
           </m.div>
@@ -280,7 +280,7 @@ function HomeSection({ translations }: HomeSectionProps) {
             }}
             transition={{ duration: 3, repeat: Infinity }}
           >
-            <p className="text-xs text-cyber-cyan font-mono">SIEM</p>
+            <p className="text-xs text-cyber-cyan font-mono">B3</p>
           </m.div>
 
           <m.div
@@ -290,7 +290,7 @@ function HomeSection({ translations }: HomeSectionProps) {
             }}
             transition={{ duration: 3, repeat: Infinity, delay: 1 }}
           >
-            <p className="text-xs text-cyber-green font-mono">EDR</p>
+            <p className="text-xs text-cyber-green font-mono">CDI</p>
           </m.div>
 
           <m.div
@@ -300,7 +300,7 @@ function HomeSection({ translations }: HomeSectionProps) {
             }}
             transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
           >
-            <p className="text-xs text-cyber-orange font-mono">IDS</p>
+            <p className="text-xs text-cyber-orange font-mono">IPCA</p>
           </m.div>
         </m.div>
       </div>

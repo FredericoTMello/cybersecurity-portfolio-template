@@ -32,31 +32,31 @@ export const NAV_ITEMS: NavItem[] = [
   { 
     id: 'home', 
     icon: Home, 
-    label: 'Home', 
+    label: 'Início', 
     href: '/' 
   },
   { 
     id: 'projects-preview', 
     icon: FolderGit2, 
-    label: 'Projects', 
+    label: 'Projetos', 
     href: '/projects' 
   },
   { 
     id: 'homelabs-preview', 
     icon: FlaskConical, 
-    label: 'Home Labs', 
+    label: 'Laboratórios', 
     href: '/homelabs' 
   },
   { 
     id: 'formation', 
     icon: GraduationCap, 
-    label: 'Formation', 
+    label: 'Formação', 
     href: '/formation' 
   },
   { 
     id: 'experience', 
     icon: Briefcase, 
-    label: 'Experience', 
+    label: 'Experiência', 
     href: '/experience' 
   },
   { 
@@ -68,7 +68,7 @@ export const NAV_ITEMS: NavItem[] = [
   { 
     id: 'contact', 
     icon: Mail, 
-    label: 'Contact', 
+    label: 'Contato', 
     href: '/contact' 
   },
 ];
