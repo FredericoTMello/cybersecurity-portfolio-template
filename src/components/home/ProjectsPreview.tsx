@@ -23,10 +23,10 @@ export default function ProjectsPreviewSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My Favorite Deployments
+            Serviços e Soluções Financeiras
           </h2>
           <p className="text-cyber-gray-light text-lg max-w-2xl mx-auto">
-            Projects, tools and automation I like 
+            Soluções que potencializam seu patrimônio e garantem tranquilidade financeira. 
           </p>
           <m.div
             initial={{ scaleX: 0 }}
