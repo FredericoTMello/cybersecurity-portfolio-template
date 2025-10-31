@@ -2,12 +2,20 @@ import type { Metadata } from 'next';
 import { generateSEO } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEO({
-  title: 'About - Blue Team Cybersecurity Specialist',
-  description: 'Learn about my journey in cybersecurity and Blue Team operations. Combining analytical thinking with practical security implementation for robust defensive strategies.',
+  title: 'Sobre - Consultor Financeiro W1',
+  description: 'Conheça minha trajetória em finanças, formação e experiência como consultor credenciado W1. Planejamento patrimonial, soluções personalizadas e dedicação à sua prosperidade.',
   url: '/about',
   type: 'profile',
   image: '/images/about/profile.png',
-  tags: ['about', 'cybersecurity professional', 'blue team specialist', 'physics background', 'career transition'],
+  tags: [
+    'sobre', 
+    'consultor financeiro', 
+    'W1 Consultoria', 
+    'planejamento patrimonial',
+    'trajetória',
+    'finanças',
+    'consultoria personalizada'
+  ],
 });
 
 export default function AboutLayout({

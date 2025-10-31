@@ -38,7 +38,7 @@ export const NAV_ITEMS: NavItem[] = [
   { 
     id: 'projects-preview', 
     icon: FolderGit2, 
-    label: 'Projetos', 
+    label: 'Soluções 360°', 
     href: '/projects' 
   },
   { 

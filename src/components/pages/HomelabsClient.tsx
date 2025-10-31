@@ -15,16 +15,17 @@ interface HomelabsClientProps {
 }
 
 export default function HomelabsClient({ labs, featured, focusAreas, difficulties }: HomelabsClientProps) {
-  const [activeFocus, setActiveFocus] = useState<string>('All');
-  const [activeDifficulty, setActiveDifficulty] = useState<string>('All');
+  const [activeFocus, setActiveFocus] = useState<string>('Todas');
+  const [activeDifficulty, setActiveDifficulty] = useState<string>('Todas');
 
-  const focusFilters = useMemo(() => ['All', ...focusAreas], [focusAreas]);
-  const difficultyFilters = useMemo(() => ['All', ...difficulties], [difficulties]);
+  const focusFilters = useMemo(() => ['Todas', ...focusAreas], [focusAreas]);
+  const difficultyFilters = useMemo(() => ['Todas', ...difficulties], [difficulties]);
+
   const catalog = useMemo(() => {
     const withoutFeatured = featured ? labs.filter((lab) => lab.slug !== featured.slug) : labs;
     return withoutFeatured.filter((lab) => {
-      const focusMatch = activeFocus === 'All' || lab.focusArea === activeFocus;
-      const difficultyMatch = activeDifficulty === 'All' || lab.difficulty === activeDifficulty;
+      const focusMatch = activeFocus === 'Todas' || lab.focusArea === activeFocus;
+      const difficultyMatch = activeDifficulty === 'Todas' || lab.difficulty === activeDifficulty;
       return focusMatch && difficultyMatch;
     });
   }, [labs, featured, activeFocus, activeDifficulty]);
@@ -38,8 +39,8 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
   }, []);
 
   const handleReset = useCallback(() => {
-    setActiveFocus('All');
-    setActiveDifficulty('All');
+    setActiveFocus('Todas');
+    setActiveDifficulty('Todas');
   }, []);
 
   const featuredObjectives = useMemo(() => featured?.objectives.slice(0, 4) ?? [], [featured]);
@@ -54,22 +55,13 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
             transition={{ delay: 0.1 }}
             className="text-center max-w-3xl mx-auto"
           >
-            {/* <m.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.15 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-cyber-green/15 border border-cyber-green/30 rounded-full text-sm font-mono text-cyber-green tracking-widest"
-            >
-              <Beaker size={16} />
-              HANDS-ON CYBER RANGES
-            </m.p> */}
             <m.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="text-cyber-green font-mono text-sm mb-4 tracking-widest"
             >
-                HANDS-ON CYBER RANGES
+              GUIAS DE PLANEJAMENTO FINANCEIRO
             </m.p>
             <m.h2
               initial={{ opacity: 0, y: 12 }}
@@ -77,7 +69,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               transition={{ delay: 0.25 }}
               className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-white"
             >
-              Home Labs
+              Guias & Planos 360°
             </m.h2>
             <m.p
               initial={{ opacity: 0, y: 12 }}
@@ -85,7 +77,8 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               transition={{ delay: 0.35 }}
               className="mt-6 text-lg text-cyber-gray-light"
             >
-              Blueprinted environments I run at home to pressure-test detections, rehearse incident response, and validate purple team strategies. Each lab ships with scenario context, required tooling, and success metrics.
+              Guias práticos que uso na consultoria W1 para organizar finanças, estruturar patrimônio e dar clareza às
+              decisões. Cada guia traz contexto, recursos necessários e critérios de sucesso — sempre com visão 360°.
             </m.p>
             <m.div
               initial={{ scaleX: 0 }}
@@ -109,7 +102,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-cyan/15 border border-cyber-cyan/30 rounded-full text-xs font-mono text-cyber-cyan mb-4">
                   <BadgeCheck size={14} />
-                  Featured runbook
+                  Guia em destaque
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{featured.title}</h2>
                 <p className="text-cyber-gray-light text-base md:text-lg leading-relaxed mb-6">
@@ -118,7 +111,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
                 <div className="flex flex-wrap items-center gap-4 text-sm text-cyber-gray-light mb-8">
                   <span className="inline-flex items-center gap-2">
                     <ShieldAlert size={16} className="text-cyber-green" />
-                    {featured.difficulty}
+                    {featured.difficulty /* Complexidade */}
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <Timer size={16} className="text-cyber-green" />
@@ -126,14 +119,12 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
                   </span>
                   <span className="inline-flex items-center gap-2">
                     <Layers size={16} className="text-cyber-cyan" />
-                    {featured.focusArea}
+                    {featured.focusArea /* Área */}
                   </span>
                 </div>
                 {featuredObjectives.length > 0 && (
                   <div className="mb-8">
-                    <p className="text-xs font-mono text-cyber-cyan/70 tracking-widest mb-3">
-                      MISSION OBJECTIVES
-                    </p>
+                    <p className="text-xs font-mono text-cyber-cyan/70 tracking-widest mb-3">OBJETIVOS DO PLANO</p>
                     <ul className="space-y-2 text-sm text-cyber-gray-light">
                       {featuredObjectives.map((objective) => (
                         <li key={objective} className="flex gap-2">
@@ -145,16 +136,16 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
                   </div>
                 )}
                 <Link
-                  href={`/homelabs/${featured.slug}`}
+                  href={`/guias/${featured.slug}`}
                   prefetch
                   className="inline-flex items-center gap-2 px-6 py-3 bg-cyber-green text-cyber-dark font-semibold rounded-lg hover:shadow-neon-green transition-all duration-300"
                 >
-                  Launch featured lab
+                  Abrir guia
                   <Timer size={18} />
                 </Link>
               </div>
 
-              <div className="relative h-full min-h-[280px]">
+              <div className="relative h-full min-h=[280px]">
                 {featured.coverImage ? (
                   <Image
                     src={featured.coverImage}
@@ -175,14 +166,14 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-10">
           <div className="flex items-center gap-3 text-cyber-gray-light">
             <Filter size={18} className="text-cyber-green" />
-            <span className="font-mono text-sm uppercase tracking-[0.2em]">Filter Labs</span>
+            <span className="font-mono text-sm uppercase tracking-[0.2em]">Filtrar Guias</span>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex flex-wrap gap-2">
               {focusFilters.map((focus) => (
                 <FilterButton
                   key={focus}
-                  label={focus === 'All' ? 'Focus: All' : focus}
+                  label={focus === 'Todas' ? 'Área: Todas' : focus}
                   isActive={activeFocus === focus}
                   onClick={() => handleFocusChange(focus)}
                 />
@@ -192,7 +183,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               {difficultyFilters.map((difficulty) => (
                 <FilterButton
                   key={difficulty}
-                  label={difficulty === 'All' ? 'Difficulty: All' : difficulty}
+                  label={difficulty === 'Todas' ? 'Complexidade: Todas' : difficulty}
                   isActive={activeDifficulty === difficulty}
                   onClick={() => handleDifficultyChange(difficulty)}
                 />
@@ -204,12 +195,12 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
               className="inline-flex items-center gap-2 px-4 py-2 text-sm text-cyber-cyan border border-cyber-cyan/30 rounded-lg hover:bg-cyber-cyan/10 transition-colors"
             >
               <RefreshCw size={16} />
-              Reset
+              Limpar
             </button>
           </div>
         </div>
 
-  <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
           {catalog.map((lab, index) => (
             <CatalogCard key={lab.slug} lab={lab} index={index} />
           ))}
@@ -217,7 +208,9 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
 
         {catalog.length === 0 && (
           <div className="mt-20 text-center text-cyber-gray-light">
-            <p className="text-lg">No labs match the selected filters yet. Reset filters to view all scenarios.</p>
+            <p className="text-lg">
+              Nenhum guia corresponde aos filtros selecionados. Limpe os filtros para ver todos os conteúdos.
+            </p>
           </div>
         )}
       </div>
@@ -288,10 +281,10 @@ const CatalogCard = memo(function CatalogCard({ lab, index }: CatalogCardProps) 
       <div className="flex-1 p-6">
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-navy/70 border border-cyber-cyan/30 rounded-full text-xs font-mono text-cyber-cyan">
-            {lab.focusArea}
+            {lab.focusArea /* Área */}
           </span>
           <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-green/15 border border-cyber-green/30 rounded-full text-xs font-mono text-cyber-green">
-            {lab.difficulty}
+            {lab.difficulty /* Complexidade */}
           </span>
         </div>
         <h3 className="text-xl font-semibold text-white mb-3">{lab.title}</h3>
@@ -304,7 +297,7 @@ const CatalogCard = memo(function CatalogCard({ lab, index }: CatalogCardProps) 
           {displayedTools && (
             <span className="inline-flex items-center gap-1">
               <Wrench size={14} className="text-cyber-cyan" />
-              {displayedTools}
+              {displayedTools /* recursos necessários */}
             </span>
           )}
         </div>
@@ -319,11 +312,11 @@ const CatalogCard = memo(function CatalogCard({ lab, index }: CatalogCardProps) 
           </ul>
         )}
         <Link
-          href={`/homelabs/${lab.slug}`}
+          href={`/guias/${lab.slug}`}
           prefetch
           className="inline-flex items-center gap-2 text-sm text-cyber-cyan hover:text-cyber-green transition-colors font-semibold"
         >
-          Open lab
+          Abrir guia
           <Layers size={16} />
         </Link>
       </div>

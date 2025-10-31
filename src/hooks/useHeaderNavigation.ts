@@ -26,7 +26,7 @@ export function useHeaderNavigation() {
       return [
         { href: '#home', label: 'Início', isAnchor: true },
         { href: '/about', label: 'Sobre', isAnchor: false },
-        { href: '#projects-preview', label: 'Projetos', isAnchor: true },
+        { href: '#projects-preview', label: 'Soluções 360°', isAnchor: true },
         { href: '#homelabs-preview', label: 'Home Labs', isAnchor: true },
         { href: '#formation', label: 'Formação', isAnchor: true },
         { href: '#experience', label: 'Experiência', isAnchor: true },
@@ -36,14 +36,14 @@ export function useHeaderNavigation() {
     }
 
     return [
-      { href: '/', label: 'Home', isAnchor: false },
-      { href: '/about', label: 'About', isAnchor: false },
-      { href: '/projects', label: 'Projects', isAnchor: false },
-  { href: '/homelabs', label: 'Home Labs', isAnchor: false },
-      { href: '/formation', label: 'Formation', isAnchor: false },
-      { href: '/experience', label: 'Experience', isAnchor: false },
+      { href: '/', label: 'Início', isAnchor: false },
+      { href: '/about', label: 'Sobre', isAnchor: false },
+      { href: '/projects', label: 'Soluções 360°', isAnchor: false },
+      { href: '/homelabs', label: 'Home Labs', isAnchor: false },
+      { href: '/formation', label: 'Formação', isAnchor: false },
+      { href: '/experience', label: 'Experiência', isAnchor: false },
       { href: '/blog', label: 'Blog', isAnchor: false },
-      { href: '/contact', label: 'Contact', isAnchor: false },
+      { href: '/contact', label: 'Contato', isAnchor: false },
     ];
   };
 

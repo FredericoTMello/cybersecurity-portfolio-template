@@ -5,9 +5,9 @@ export const siteConfig = {
     name: 'Frederico Mello',
     codename: 'frederico-w1',
     jobTitle: 'Consultor Financeiro | Gestão Patrimonial',
-    tagline: 'Da Estabilidade à Riqueza Acelerada: Seu Plano Mestre para a Independência Financeira.',
+    tagline: 'Crescer com propósito é a forma mais inteligente de prosperar.',
     description:
-      'Transformo incertezas em clareza financeira. Como Consultor W1, conecto você à maior consultoria do Brasil para construir patrimônio, proteção e legado. Com plano 360º, tecnologia de Wealth Management e apoio de especialistas, garanto orientação de confiança para seu crescimento e tranquilidade.',
+      'Como Consultor W1, conecto você à maior consultoria financeira do Brasil para planejar, proteger e expandir seu legado. Com visão 360º e tecnologia de Wealth Management, ajudo você a transformar recursos em impacto, equilíbrio e tranquilidade.',
     organization: 'W1 Consultoria Financeira & Wealth Management',
   },
 

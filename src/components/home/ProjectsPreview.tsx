@@ -156,7 +156,7 @@ export default function ProjectsPreviewSection() {
               href="./projects"
               className="inline-flex items-center gap-2 px-8 py-4 text-cyber-cyan hover:text-cyber-green transition-colors duration-300 group"
             >
-              <span className="font-mono text-lg">Ver Todos os Projetos</span>
+              <span className="font-mono text-lg">Ver Todos as Soluções</span>
               <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
             </Link>
           </m.div>

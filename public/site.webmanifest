@@ -1,41 +1,41 @@
 {
-  "name": "Cybersecurity Portfolio Template",
-  "short_name": "CyberPortfolio",
-  "description": "Professional Blue Team cybersecurity portfolio showcasing projects, experience, and insights in defensive security operations.",
+  "name": "W1 Consultoria Financeira",
+  "short_name": "W1 Finance",
+  "description": "Consultoria financeira personalizada: planejamento patrimonial, investimentos, educação financeira e proteção para você e sua empresa.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a1929",
-  "theme_color": "#00d9ff",
+  "background_color": "#0066cc",
+  "theme_color": "#0066cc",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/site/icon-192.jpeg",
+      "src": "/images/site/icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/site/icon-512.jpeg",
+      "src": "/images/site/icon-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["productivity", "education", "business"],
+  "categories": ["productivity", "education", "business", "finance"],
   "shortcuts": [
     {
       "name": "Blog",
       "short_name": "Blog",
-      "description": "Read cybersecurity articles",
+      "description": "Conteúdos sobre finanças, investimentos e dicas de patrimônio.",
       "url": "/blog",
-      "icons": [{ "src": "/images/site/icon-192.jpeg", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/site/icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Projects",
-      "short_name": "Projects",
-      "description": "View security projects",
+      "name": "Serviços",
+      "short_name": "Serviços",
+      "description": "Veja os serviços e soluções oferecidos pela W1.",
       "url": "/projects",
-      "icons": [{ "src": "/images/site/icon-192.jpeg", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/site/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -25,13 +25,14 @@ export default function ProjectsSection() {
             viewport={{ once: true }}
             className="text-cyber-green font-mono text-sm mb-4 tracking-widest"
           >
-            PROJECT PORTFOLIO
+            W1 CONSULTORIA FINANCEIRA
           </m.p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            All My Projects
+            Soluções 360°
           </h2>
           <p className="text-cyber-gray-light text-lg max-w-2xl mx-auto">
-            Full Stack Development, DevSecOps & Blue Team Operations
+            Consultoria completa em planejamento financeiro pessoal e empresarial — 
+            com foco em proteção, crescimento e tranquilidade em cada etapa da sua vida financeira.
           </p>
           <m.div
             initial={{ scaleX: 0 }}

@@ -29,7 +29,7 @@ export default function Home() {
     codename: siteConfig.codename,
     tagline: siteConfig.author.tagline,
     description: siteConfig.author.description,
-    cta: 'Projetos',
+    cta: 'Soluções 360°',
   };
 
   return (
