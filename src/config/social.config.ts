@@ -10,58 +10,53 @@
 export const socialConfig = {
   /**
    * LinkedIn profile
-   * Get your LinkedIn username from your profile URL:
-   * https://linkedin.com/in/YOUR-USERNAME
    */
   linkedin: {
-    username: 'your-linkedin-username',
-    url: 'https://linkedin.com/in/your-linkedin-username',
+    username: 'frederico-mello-w1',
+    url: 'https://linkedin.com/in/frederico-mello-w1',
     label: 'LinkedIn',
   },
 
   /**
-   * GitHub profile
-   * Your GitHub username
-   */
-  github: {
-    username: 'your-github-username',
-    url: 'https://github.com/your-github-username',
-    label: 'GitHub',
-  },
-
-  /**
    * Twitter/X profile
-   * Your Twitter/X handle (without the @ symbol)
    */
   twitter: {
-    username: 'your-twitter-handle',
-    handle: '@your-twitter-handle',
-    url: 'https://twitter.com/your-twitter-handle',
+    username: 'Frederico Mello',
+    handle: '@Frederico_W1',
+    url: 'https://x.com/Frederico_W1',
     label: 'X (Twitter)',
   },
 
   /**
-   * Additional social platforms (optional)
-   * Uncomment and configure as needed:
+   * Instagram profile (ADICIONADO!)
    */
+  instagram: {
+    username: 'frederico.w1',
+    url: 'https://instagram.com/frederico.w1',
+    label: 'Instagram',
+  },
 
-  // email: {
-  //   address: 'your.email@example.com',
-  //   url: 'mailto:your.email@example.com',
-  //   label: 'Email',
-  // },
+  /**
+   * WhatsApp contact (ADICIONADO!)
+   */
+  whatsapp: {
+    number: '5516XXXXXXXX', // Coloque o seu número com DDI+DDD+NUMERO
+    url: 'https://wa.me/5516XXXXXXXX', // Coloque seu número aqui também
+    label: 'WhatsApp',
+  },
 
-  // mastodon: {
-  //   username: '@yourusername@mastodon.social',
-  //   url: 'https://mastodon.social/@yourusername',
-  //   label: 'Mastodon',
-  // },
+  /**
+   * Email contact
+   */
+  email: {
+    address: 'fredericomello.w1@gmail.com',
+    url: 'mailto:fredericomello.w1@gmail.com',
+    label: 'Email',
+  },
 
-  // medium: {
-  //   username: 'yourusername',
-  //   url: 'https://medium.com/@yourusername',
-  //   label: 'Medium',
-  // },
+  // Outras redes podem ser adicionadas aqui (se desejar)
+  // mastodon: { ... }
+  // medium: { ... }
 } as const;
 
 export type SocialConfig = typeof socialConfig;

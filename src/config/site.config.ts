@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Frederico Mello - Consultor Financeiro W1',
-  codename: 'W1 Consultoria',
+  codename: 'W1',
   author: {
     name: 'Frederico Mello',
     codename: 'frederico-w1',

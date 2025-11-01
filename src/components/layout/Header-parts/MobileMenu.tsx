@@ -7,7 +7,7 @@
 
 import { m, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Linkedin, Twitter, Instagram, MessageCircle } from 'lucide-react';
 import { socialConfig } from '@/config/social.config';
 
 interface NavLink {
@@ -26,15 +26,17 @@ export function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     onClose();
-    
     // Extract section ID from href (remove #)
     const sectionId = href.replace('#', '');
     const element = document.getElementById(sectionId);
-    
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  // Classe igual para todos os ícones
+  const iconClass =
+    'w-9 h-9 rounded-lg bg-cyber-teal-dark border border-cyber-cyan/20 flex items-center justify-center text-cyber-cyan hover:border-cyber-cyan hover:shadow-neon-cyan transition-all duration-300';
 
   return (
     <AnimatePresence>
@@ -74,31 +76,37 @@ export function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) {
                 href={socialConfig.linkedin.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-cyber-cyan hover:text-white transition-colors"
+                className={iconClass}
                 aria-label={socialConfig.linkedin.label}
               >
                 <Linkedin size={18} />
-                <span>LinkedIn</span>
               </a>
               <a
                 href={socialConfig.twitter.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-400 hover:text-white transition-colors"
+                className={iconClass}
                 aria-label={socialConfig.twitter.label}
               >
                 <Twitter size={18} />
-                <span>Twitter</span>
               </a>
               <a
-                href={socialConfig.github.url}
+                href={socialConfig.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-cyber-gray-light hover:text-white transition-colors"
-                aria-label={socialConfig.github.label}
+                className={iconClass}
+                aria-label={socialConfig.instagram.label}
               >
-                <Github size={18} />
-                <span>GitHub</span>
+                <Instagram size={18} />
+              </a>
+              <a
+                href={socialConfig.whatsapp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={iconClass}
+                aria-label={socialConfig.whatsapp.label}
+              >
+                <MessageCircle size={18} />
               </a>
             </div>
           </div>

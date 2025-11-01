@@ -29,10 +29,12 @@ const LabCard = memo(function LabCard({ lab, index }: LabCardProps) {
       <div className="flex flex-col h-full bg-cyber-teal-dark/40 backdrop-blur-sm border border-cyber-cyan/20 rounded-xl overflow-hidden hover:border-cyber-green/40 hover:shadow-glow-green/40 transition-all">
         <div className="px-6 pt-6 pb-4">
           <div className="flex items-center justify-between mb-4">
+            {/* Área (ex.: Pessoal, Empresarial, Patrimonial) */}
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-green/15 border border-cyber-green/30 rounded-full text-xs font-mono text-cyber-green">
               <Beaker size={14} />
               {lab.focusArea}
             </span>
+            {/* Complexidade (Básico / Intermediário / Avançado) */}
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-navy/70 border border-cyber-cyan/30 rounded-full text-xs font-mono text-cyber-cyan">
               <ShieldAlert size={14} />
               {lab.difficulty}
@@ -61,7 +63,7 @@ const LabCard = memo(function LabCard({ lab, index }: LabCardProps) {
         {objectives.length > 0 && (
           <div className="px-6 pb-6">
             <p className="text-xs font-mono text-cyber-cyan/70 tracking-wide mb-3">
-              FIRST OBJECTIVES
+              PRÓXIMOS PASSOS
             </p>
             <ul className="space-y-2 text-sm text-cyber-gray-light">
               {objectives.map((objective) => (
@@ -80,7 +82,7 @@ const LabCard = memo(function LabCard({ lab, index }: LabCardProps) {
             prefetch
             className="inline-flex items-center gap-2 px-5 py-3 bg-cyber-green/15 border border-cyber-green/30 rounded-lg text-cyber-green hover:bg-cyber-green/30 hover:text-cyber-dark transition-all duration-300 group"
           >
-            <span className="font-mono text-sm">Launch lab</span>
+            <span className="font-mono text-sm">Abrir guia</span>
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -94,7 +96,7 @@ LabCard.displayName = 'LabCard';
 export default function HomelabPreviewClient({ labs }: HomelabPreviewClientProps) {
   return (
     <section
-      id="homelabs-preview"
+      id="guias-preview"
       className="min-h-screen py-20 bg-gradient-to-br from-cyber-navy via-cyber-dark to-cyber-darker"
     >
       <div className="container mx-auto px-6">
@@ -110,13 +112,14 @@ export default function HomelabPreviewClient({ labs }: HomelabPreviewClientProps
             viewport={{ once: true, amount: 0.2 }}
             className="text-cyber-cyan font-mono text-sm mb-4 tracking-widest"
           >
-            HOME LABS
+            GUIAS FINANCEIROS
           </m.p>
-          <h2 id="homelabs-heading" className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Detection-first playground
+          <h2 id="guias-heading" className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Para cada objetivo, um caminho possível.
           </h2>
           <p className="text-cyber-gray-light text-lg max-w-3xl mx-auto">
-            Recreate the exact defensive scenarios I build to train SOC teams: zero-to-prod environments, attack simulations, and response playbooks ready to execute.
+            Seleção de guias práticos usados na consultoria W1 para organizar finanças, proteger patrimônio e
+            tomar decisões com clareza — com etapas, recursos e critérios de sucesso.
           </p>
           <m.div
             initial={{ scaleX: 0 }}
@@ -144,7 +147,7 @@ export default function HomelabPreviewClient({ labs }: HomelabPreviewClientProps
             prefetch
             className="inline-flex items-center gap-2 px-8 py-4 bg-cyber-cyan text-cyber-dark font-semibold rounded-lg hover:shadow-neon-cyan hover:scale-105 transition-all duration-300 group"
           >
-            Explore full catalog
+            Ver todos os guias
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </m.div>

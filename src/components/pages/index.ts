@@ -2,6 +2,6 @@
 // that uses fs module. Import it directly from './Blog' when needed in server components.
 
 export { default as Contact } from './Contact';
-export { default as Experience } from './Experience';
-export { default as Formation } from './Formation';
+//export { default as Experience } from './Experience';
+//export { default as Formation } from './Formation';
 export { default as Projects } from './Projects';

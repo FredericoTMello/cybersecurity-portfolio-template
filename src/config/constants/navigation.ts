@@ -5,15 +5,14 @@
 
 import { 
   Home, 
-  Briefcase, 
-  GraduationCap, 
   FolderGit2, 
   FileText, 
   Mail,
   Linkedin,
-  Github,
   Twitter,
-  FlaskConical
+  FlaskConical,
+  Instagram,
+  MessageCircle
 } from 'lucide-react';
 
 export interface NavItem {
@@ -45,20 +44,11 @@ export const NAV_ITEMS: NavItem[] = [
     id: 'homelabs-preview', 
     icon: FlaskConical, 
     label: 'Laboratórios', 
-    href: '/homelabs' 
+    href: '#homelabs-preview' 
   },
-  { 
-    id: 'formation', 
-    icon: GraduationCap, 
-    label: 'Formação', 
-    href: '/formation' 
-  },
-  { 
-    id: 'experience', 
-    icon: Briefcase, 
-    label: 'Experiência', 
-    href: '/experience' 
-  },
+  // Removidos:
+  // { id: 'formation', icon: GraduationCap, label: 'Formação', href: '/formation' },
+  // { id: 'experience', icon: Briefcase, label: 'Experiência', href: '/experience' },
   { 
     id: 'blog-preview', 
     icon: FileText, 
@@ -83,21 +73,28 @@ export const SOCIAL_ITEMS: NavItem[] = [
     icon: Linkedin,
     label: 'LinkedIn',
     isExternal: true,
-    href: 'https://linkedin.com/in/your-linkedin-username'
+    href: 'https://linkedin.com/in/frederico-mello-w1'
   },
   {
-    id: 'github',
-    icon: Github,
-    label: 'GitHub',
+    id: 'instagram',
+    icon: Instagram,
+    label: 'Instagram',
     isExternal: true,
-    href: 'https://github.com/yourusername'
+    href: 'https://instagram.com/fredericomello.w1'
+  },
+  {
+    id: 'whatsapp',
+    icon: MessageCircle, // Use Lucide MessageCircle como ícone “whatsapp minimalista”
+    label: 'WhatsApp',
+    isExternal: true,
+    href: 'https://wa.me/5516XXXXXXXX'
   },
   {
     id: 'twitter',
     icon: Twitter,
     label: 'X (Twitter)',
     isExternal: true,
-    href: 'https://twitter.com/yourusername'
+    href: 'https://twitter.com/frederico_w1'
   },
 ];
 

@@ -9,8 +9,8 @@ import { siteConfig } from '@/config/site.config';
 // Dynamic imports for below-the-fold content
 const ProjectsPreview = dynamic(() => import('@/components/home/ProjectsPreview'));
 const BlogPreview = dynamic(() => import('@/components/home/BlogPreview'));
-const FormationSection = dynamic(() => import('@/components/pages/Formation'));
-const ExperienceSection = dynamic(() => import('@/components/pages/Experience'));
+// const FormationSection = dynamic(() => import('@/components/pages/Formation'));
+// const ExperienceSection = dynamic(() => import('@/components/pages/Experience'));
 const ContactSection = dynamic(() => import('@/components/pages/Contact'));
 
 export const metadata: Metadata = generateSEO({
@@ -22,7 +22,6 @@ export const metadata: Metadata = generateSEO({
 });
 
 export default function Home() {
-  // English translations
   const homeTranslations = {
     badge: 'Consultor Financeiro | Gestão Patrimonial',
     title: siteConfig.author.name,
@@ -36,35 +35,27 @@ export default function Home() {
     <main className="relative min-h-screen cyber-bg-animated">
       {/* Header with Navigation */}
       <Header />
-      
       {/* Floating Navigation */}
       <FloatingNav />
-
       {/* Main Content Sections */}
       <section id="home" aria-labelledby="home-heading">
         <HomeSection translations={homeTranslations} />
       </section>
-      
       <section id="projects" aria-labelledby="projects-heading">
         <ProjectsPreview />
       </section>
-
-      <section id="homelabs" aria-labelledby="homelabs-heading">
+      <section id="homelabs-preview" aria-labelledby="homelabs-heading">
         <HomelabPreview />
       </section>
-      
-      <section id="formation" aria-labelledby="formation-heading">
+      {/* <section id="formation" aria-labelledby="formation-heading">
         <FormationSection />
       </section>
-      
       <section id="experience" aria-labelledby="experience-heading">
         <ExperienceSection />
-      </section>
-      
+      </section> */}
       <section id="blog" aria-labelledby="blog-heading">
         <BlogPreview />
       </section>
-      
       <section id="contact" aria-labelledby="contact-heading">
         <ContactSection />
       </section>

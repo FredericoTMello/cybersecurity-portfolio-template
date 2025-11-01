@@ -18,7 +18,7 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
       className="min-h-screen py-20 bg-gradient-to-br from-cyber-darker via-cyber-dark to-cyber-navy"
     >
       <div className="container mx-auto px-6">
-        {/* Section Header */}
+        {/* Cabeçalho da seção */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,13 +31,13 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
             viewport={{ once: true }}
             className="text-cyber-cyan font-mono text-sm mb-4 tracking-widest"
           >
-            KNOWLEDGE SHARING
+            CONTEÚDOS & INSIGHTS
           </m.p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My recent logs
+            Leituras recentes
           </h2>
           <p className="text-cyber-gray-light text-lg max-w-2xl mx-auto mb-6">
-            Technical articles & insights on Cybersecurity
+            Artigos práticos sobre planejamento financeiro, proteção patrimonial e decisões 360°.
           </p>
           <m.div
             initial={{ scaleX: 0 }}
@@ -48,7 +48,7 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
           />
         </m.div>
 
-        {/* Blog Posts Grid */}
+        {/* Grid de posts */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {latestPosts.map((post, index) => (
             <m.article
@@ -60,13 +60,12 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
               className="group"
             >
               <div className="h-full flex flex-col bg-cyber-teal-dark/30 backdrop-blur-sm border border-cyber-green/20 rounded-xl overflow-hidden hover:border-cyber-green/50 hover:shadow-glow-green transition-all duration-300">
-                {/* Featured Image - Clickable */}
+                {/* Capa clicável */}
                 <Link href={`/blog/${post.slug}`} className="block relative aspect-video bg-cyber-navy/30 cursor-pointer overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-cyber-green/10 to-cyber-cyan/10 z-10" />
-                  {/* Show cover image for each post */}
                   {post.coverImage ? (
-                    <Image 
-                      src={post.coverImage} 
+                    <Image
+                      src={post.coverImage}
                       alt={post.title}
                       fill
                       className="object-cover"
@@ -87,9 +86,9 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
                   )}
                 </Link>
 
-                {/* Post Content */}
+                {/* Conteúdo do post */}
                 <div className="flex-1 p-6 flex flex-col">
-                  {/* Category Badge */}
+                  {/* Categoria */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-green/10 border border-cyber-green/30 rounded-full mb-3 w-fit">
                     <span className="text-xs text-cyber-green font-mono">
                       {post.category}
@@ -102,11 +101,11 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
                     </h3>
                   </Link>
 
-                    <p className="text-cyber-gray mb-4 leading-relaxed text-sm flex-1">
+                  <p className="text-cyber-gray mb-4 leading-relaxed text-sm flex-1">
                     {post.description}
                   </p>
 
-                  {/* Meta Info */}
+                  {/* Metadados */}
                   <div className="flex flex-wrap gap-3 text-xs text-cyber-gray-light pt-4 border-t border-cyber-cyan/10">
                     <span className="flex items-center gap-1">
                       <Calendar size={14} className="text-cyber-green" />
@@ -124,7 +123,7 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
           ))}
         </div>
 
-        {/* View All Button - Desktop */}
+        {/* Botão "ver todos" - Desktop */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -135,12 +134,12 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
             href="./blog"
             className="inline-flex items-center gap-2 px-6 py-3 bg-cyber-green/10 border border-cyber-green/30 rounded-lg text-cyber-green hover:bg-cyber-green/20 hover:shadow-neon-green transition-all duration-300 group"
           >
-            <span className="font-mono text-sm">View All</span>
+            <span className="font-mono text-sm">Ver todos</span>
             <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
           </Link>
         </m.div>
 
-        {/* View All Button - Mobile */}
+        {/* Botão "ver todos" - Mobile */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +150,7 @@ export default function BlogPreviewClient({ posts: latestPosts }: BlogPreviewCli
             href="./blog"
             className="inline-flex items-center gap-2 px-8 py-4 bg-cyber-green text-cyber-dark font-bold rounded-lg hover:shadow-neon-green hover:scale-105 transition-all duration-300 group"
           >
-            View All Articles
+            Ver todos os artigos
             <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
           </Link>
         </m.div>

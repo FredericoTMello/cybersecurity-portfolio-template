@@ -14,8 +14,8 @@ export interface NavLink {
 }
 
 /**
- * Returns navigation links appropriate for current page
- * Home page uses anchor links, other pages use absolute paths
+ * Returns navigation links appropriate for current page.
+ * Home page uses anchor links, other pages use absolute paths.
  */
 export function useHeaderNavigation() {
   const pathname = usePathname();
@@ -26,10 +26,11 @@ export function useHeaderNavigation() {
       return [
         { href: '#home', label: 'Início', isAnchor: true },
         { href: '/about', label: 'Sobre', isAnchor: false },
-        { href: '#projects-preview', label: 'Soluções 360°', isAnchor: true },
-        { href: '#homelabs-preview', label: 'Home Labs', isAnchor: true },
-        { href: '#formation', label: 'Formação', isAnchor: true },
-        { href: '#experience', label: 'Experiência', isAnchor: true },
+        { href: '/projects', label: 'Soluções 360°', isAnchor: false },
+        { href: '/homelabs', label: 'Home Labs', isAnchor: false },
+        // Removidos:
+        // { href: '#formation', label: 'Formação', isAnchor: true },
+        // { href: '#experience', label: 'Experiência', isAnchor: true },
         { href: '/blog', label: 'Blog', isAnchor: false },
         { href: '#contact', label: 'Contato', isAnchor: true },
       ];
@@ -40,8 +41,9 @@ export function useHeaderNavigation() {
       { href: '/about', label: 'Sobre', isAnchor: false },
       { href: '/projects', label: 'Soluções 360°', isAnchor: false },
       { href: '/homelabs', label: 'Home Labs', isAnchor: false },
-      { href: '/formation', label: 'Formação', isAnchor: false },
-      { href: '/experience', label: 'Experiência', isAnchor: false },
+      // Removidos:
+      // { href: '/formation', label: 'Formação', isAnchor: false },
+      // { href: '/experience', label: 'Experiência', isAnchor: false },
       { href: '/blog', label: 'Blog', isAnchor: false },
       { href: '/contact', label: 'Contato', isAnchor: false },
     ];

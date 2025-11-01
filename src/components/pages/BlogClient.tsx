@@ -14,22 +14,30 @@ interface BlogSectionClientProps {
   allCategories: string[];
 }
 
+const ALL_LABEL = 'Todos';
+
 export default function BlogSectionClient({ featuredPost, recentPosts, allCategories }: BlogSectionClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>(ALL_LABEL);
 
-  // Filter posts based on search and category
+  // Filtra pelos campos básicos: título/descrição + categoria
   const filteredPosts = useMemo(() => {
-    return recentPosts.filter(post => {
-      const matchesSearch = searchQuery === '' ||
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return recentPosts.filter((post) => {
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch =
+        q === '' ||
+        post.title.toLowerCase().includes(q) ||
+        post.description.toLowerCase().includes(q);
 
-      const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
+      const matchesCategory = selectedCategory === ALL_LABEL || post.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
   }, [recentPosts, searchQuery, selectedCategory]);
+
+  // Contagem (sing/plural)
+  const resultsLabel =
+    filteredPosts.length === 1 ? '1 artigo encontrado' : `${filteredPosts.length} artigos encontrados`;
 
   return (
     <section
@@ -37,7 +45,7 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
       className="min-h-screen py-20 bg-gradient-to-br from-cyber-darker via-cyber-dark to-cyber-navy"
     >
       <div className="container mx-auto px-6">
-        {/* Section Header */}
+        {/* Cabeçalho da seção */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,13 +58,13 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
             viewport={{ once: true }}
             className="text-cyber-cyan font-mono text-sm mb-4 tracking-widest"
           >
-            KNOWLEDGE SHARING
+            CONTEÚDOS & INSIGHTS
           </m.p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Thanks for reading my logs...
+            Planejamento financeiro com clareza
           </h2>
           <p className="text-cyber-gray-light text-lg max-w-2xl mx-auto mb-6">
-            My technical articles & insights on Cybersecurity
+            Artigos práticos sobre organização financeira, proteção patrimonial e decisões 360° — no ritmo da sua vida e do seu negócio.
           </p>
           <m.div
             initial={{ scaleX: 0 }}
@@ -67,7 +75,7 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
           />
         </m.div>
 
-        {/* Featured Post */}
+        {/* Artigo em destaque */}
         {featuredPost && (
           <m.div
             initial={{ opacity: 0, y: 40 }}
@@ -76,7 +84,6 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
             className="mb-16"
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Featured Image */}
               <Link href={`/blog/${featuredPost.slug}`} className="block">
                 <div className="relative aspect-video rounded-xl overflow-hidden border border-cyber-cyan/30 bg-cyber-navy/30 group hover:border-cyber-cyan/60 transition-colors cursor-pointer">
                   {featuredPost.coverImage ? (
@@ -94,10 +101,9 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
                 </div>
               </Link>
 
-              {/* Featured Content */}
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyber-green/10 border border-cyber-green/30 rounded-full mb-4">
-                  <span className="text-sm text-cyber-green font-mono">Featured Article</span>
+                  <span className="text-sm text-cyber-green font-mono">Artigo em destaque</span>
                 </div>
 
                 <Link href={`/blog/${featuredPost.slug}`}>
@@ -110,7 +116,6 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
                   {featuredPost.description}
                 </p>
 
-                {/* Meta Info */}
                 <div className="flex flex-wrap gap-4 text-sm text-cyber-gray-light mb-6">
                   <span className="flex items-center gap-2">
                     <Calendar size={16} className="text-cyber-cyan" />
@@ -129,7 +134,7 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
                   href={`/blog/${featuredPost.slug}`}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-cyber-cyan text-cyber-dark font-bold rounded-lg hover:shadow-neon-cyan hover:scale-105 transition-all duration-300 group"
                 >
-                  Read More
+                  Ler artigo
                   <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
                 </Link>
               </div>
@@ -137,37 +142,37 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
           </m.div>
         )}
 
-        {/* Search and Filters */}
+        {/* Busca e filtros */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-12 space-y-6"
         >
-          {/* Search Bar */}
+          {/* Busca */}
           <div className="relative max-w-2xl mx-auto">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-cyber-cyan" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-cyber-cyan" size={20} />
             <input
               type="text"
-              placeholder="Search articles by title or description..."
+              placeholder="Busque por título ou descrição…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-4 bg-cyber-navy/30 border border-cyber-cyan/30 rounded-xl text-white placeholder-cyber-gray focus:border-cyber-cyan focus:outline-none focus:ring-2 focus:ring-cyber-cyan/20 transition-all"
             />
           </div>
 
-          {/* Category Filters */}
+          {/* Filtros por categoria */}
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <Filter className="text-cyber-cyan" size={18} />
             <button
-              onClick={() => setSelectedCategory('All')}
+              onClick={() => setSelectedCategory(ALL_LABEL)}
               className={`px-4 py-2 rounded-lg font-mono text-sm transition-all ${
-                selectedCategory === 'All'
+                selectedCategory === ALL_LABEL
                   ? 'bg-cyber-cyan text-cyber-dark font-bold'
                   : 'bg-cyber-navy/30 border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-cyan/10'
               }`}
             >
-              All
+              {ALL_LABEL}
             </button>
             {allCategories.map((category) => (
               <button
@@ -184,13 +189,13 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
             ))}
           </div>
 
-          {/* Results Count */}
+          {/* Contagem de resultados */}
           <p className="text-center text-cyber-gray-light font-mono text-sm">
-            {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'} found
+            {resultsLabel}
           </p>
         </m.div>
 
-        {/* All Posts Grid */}
+        {/* Grid de posts */}
         <div>
           <m.h3
             initial={{ opacity: 0, y: 20 }}
@@ -198,7 +203,7 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
             viewport={{ once: true }}
             className="text-2xl font-bold text-white mb-8"
           >
-            {selectedCategory === 'All' ? 'All Posts' : `${selectedCategory} Posts`}
+            {selectedCategory === ALL_LABEL ? 'Todos os artigos' : `Artigos — ${selectedCategory}`}
           </m.h3>
 
           {filteredPosts.length > 0 ? (
@@ -214,7 +219,7 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
                 >
                   <Link href={`/blog/${post.slug}`} className="block h-full">
                     <div className="bg-cyber-navy/30 border border-cyber-cyan/20 rounded-xl overflow-hidden hover:border-cyber-cyan/50 hover:shadow-lg hover:shadow-cyber-cyan/10 transition-all duration-300 h-full flex flex-col">
-                      {/* Cover Image */}
+                      {/* Capa */}
                       <div className="relative aspect-video bg-cyber-teal-dark/20 overflow-hidden">
                         {post.coverImage ? (
                           <Image
@@ -233,26 +238,22 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
                         )}
                       </div>
 
-                      {/* Content */}
+                      {/* Conteúdo */}
                       <div className="p-6 flex-1 flex flex-col">
-                        {/* Category Badge */}
                         <div className="mb-3">
                           <span className="inline-block px-3 py-1 bg-cyber-navy/50 border border-cyber-cyan/20 rounded-lg text-xs font-mono text-cyber-cyan">
                             {post.category}
                           </span>
                         </div>
 
-                        {/* Title */}
                         <h4 className="text-lg font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors line-clamp-2">
                           {post.title}
                         </h4>
 
-                        {/* Description */}
                         <p className="text-cyber-gray text-sm mb-4 line-clamp-3 flex-1">
                           {post.description}
                         </p>
 
-                        {/* Meta Info */}
                         <div className="flex items-center justify-between text-xs text-cyber-gray-light pt-4 border-t border-cyber-cyan/10">
                           <span className="flex items-center gap-1">
                             <Calendar size={12} />
@@ -270,24 +271,18 @@ export default function BlogSectionClient({ featuredPost, recentPosts, allCatego
               ))}
             </div>
           ) : (
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
+            <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-white mb-2">No articles found</h3>
-              <p className="text-cyber-gray mb-6">
-                Try adjusting your search or filters
-              </p>
+              <h3 className="text-2xl font-bold text-white mb-2">Nenhum artigo encontrado</h3>
+              <p className="text-cyber-gray mb-6">Tente ajustar sua busca ou os filtros.</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
-                  setSelectedCategory('All');
+                  setSelectedCategory(ALL_LABEL);
                 }}
                 className="px-6 py-3 bg-cyber-cyan text-cyber-dark font-bold rounded-lg hover:shadow-neon-cyan transition-all"
               >
-                Clear Filters
+                Limpar filtros
               </button>
             </m.div>
           )}
