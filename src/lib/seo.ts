@@ -26,7 +26,7 @@ const defaultSEO = {
   twitterHandle: socialConfig.twitter?.handle ?? '@your-twitter-handle',
   twitterUsername: socialConfig.twitter?.username ?? 'your-twitter-handle',
   linkedinUsername: socialConfig.linkedin?.username ?? 'your-linkedin-username',
-  githubUsername: socialConfig.github?.username ?? 'your-github-username',
+  //githubUsername: socialConfig.github?.username ?? 'your-github-username',
   authorName,
   authorHandle,
 };
@@ -136,7 +136,7 @@ export function generatePersonSchema() {
     sameAs: [
       `https://twitter.com/${defaultSEO.twitterUsername}`,
       `https://linkedin.com/in/${defaultSEO.linkedinUsername}`,
-      `https://github.com/${defaultSEO.githubUsername}`,
+      //`https://github.com/${defaultSEO.githubUsername}`,
     ],
     jobTitle: siteConfig.author.jobTitle,
     worksFor: {
