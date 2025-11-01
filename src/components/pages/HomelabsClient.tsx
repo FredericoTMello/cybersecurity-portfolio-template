@@ -136,7 +136,7 @@ export default function HomelabsClient({ labs, featured, focusAreas, difficultie
                   </div>
                 )}
                 <Link
-                  href={`/guias/${featured.slug}`}
+                  href={`/homelabs/${featured.slug}`}
                   prefetch
                   className="inline-flex items-center gap-2 px-6 py-3 bg-cyber-green text-cyber-dark font-semibold rounded-lg hover:shadow-neon-green transition-all duration-300"
                 >
@@ -312,7 +312,7 @@ const CatalogCard = memo(function CatalogCard({ lab, index }: CatalogCardProps) 
           </ul>
         )}
         <Link
-          href={`/guias/${lab.slug}`}
+          href={`/homelabs/${lab.slug}`}
           prefetch
           className="inline-flex items-center gap-2 text-sm text-cyber-cyan hover:text-cyber-green transition-colors font-semibold"
         >

@@ -27,7 +27,7 @@ export function useHeaderNavigation() {
         { href: '#home', label: 'Início', isAnchor: true },
         { href: '/about', label: 'Sobre', isAnchor: false },
         { href: '/projects', label: 'Soluções 360°', isAnchor: false },
-        { href: '/homelabs', label: 'Home Labs', isAnchor: false },
+        { href: '/homelabs', label: 'Laboratórios', isAnchor: false },
         // Removidos:
         // { href: '#formation', label: 'Formação', isAnchor: true },
         // { href: '#experience', label: 'Experiência', isAnchor: true },
@@ -40,7 +40,7 @@ export function useHeaderNavigation() {
       { href: '/', label: 'Início', isAnchor: false },
       { href: '/about', label: 'Sobre', isAnchor: false },
       { href: '/projects', label: 'Soluções 360°', isAnchor: false },
-      { href: '/homelabs', label: 'Home Labs', isAnchor: false },
+      { href: '/homelabs', label: 'Laboratórios', isAnchor: false },
       // Removidos:
       // { href: '/formation', label: 'Formação', isAnchor: false },
       // { href: '/experience', label: 'Experiência', isAnchor: false },
